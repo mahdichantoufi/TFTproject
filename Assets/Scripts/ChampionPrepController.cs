@@ -6,10 +6,15 @@ public class ChampionPrepController : GameController
 {
     // TODO : GET CHAMPS FROM GLABAL WITH
     private void Start() {
-        // TODO : getPlayerChampionsDetails();
         initChampions();
+        initDragandDrop();
+        // TODO : getPlayerChampionsDetails();
+        
         SpawnFightingChampions();
         SpawnSubstituteChampions();
+    }
+    private void initDragandDrop(){
+        transform.GetComponent<DragAndDrop>().setController(this);
     }
     public void SpawnSubstituteChampions(){
         ChampionSpawner Spawner;

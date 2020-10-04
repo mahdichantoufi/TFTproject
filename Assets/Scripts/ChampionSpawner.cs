@@ -12,7 +12,6 @@ public class ChampionSpawner : MonoBehaviour
     private GameObject ChampionPrefab;
 
     private void Start() {
-        ChampionPrefab = new GameObject();
         SpawnPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
     }
     public void spawnChampion(GameObject ChampionPrefab)

@@ -38,6 +38,7 @@ public class GameController : MonoBehaviour
         // TODO : getEnemyChampionsDetails();
         initChampions();
         SpawnFightingChampions();
+        SpawnEnemyChampions();
     }
 
     public void initChampions(){
@@ -84,7 +85,7 @@ public class GameController : MonoBehaviour
             }
         }
     }
-    public virtual void SpawnEnemyChampions(){
+    public void SpawnEnemyChampions(){
         ChampionSpawner Spawner;
         Transform EnemySpawnPositions = transform.Find("EnemySpawnPositions");
         int i = 1;

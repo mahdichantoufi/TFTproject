@@ -41,12 +41,7 @@ public class Champion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isActive)
-            Debug.Log("This is an active Item.");
-        else
-            Debug.Log("This is an inactive Item.");
         if(isAlive && isActive){
-            Debug.Log("This is an alive/active Item.");
             bool moved = false;
             timeSinceLastAttack += Time.deltaTime;
             GameObject closestAlly = FindClosestAlly();
