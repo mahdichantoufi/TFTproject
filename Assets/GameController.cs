@@ -34,12 +34,13 @@ public class GameController : MonoBehaviour
         }
     }
     private void Start() {
+        // TODO : getPlayerChampionsDetails();
+        // TODO : getEnemyChampionsDetails();
         initChampions();
         SpawnFightingChampions();
     }
 
     public void initChampions(){
-
         Champions = new GameObject[4];
         Champions[0] = ChampionPrefab1;
         Champions[1] = ChampionPrefab2;
@@ -60,15 +61,11 @@ public class GameController : MonoBehaviour
             EC.GetComponent<Champion>().gameController = this;
         }
     }
-    public virtual void SpawnFightingChampions(){
 
+    public void SpawnFightingChampions(){
         ChampionSpawner Spawner;
-
         Transform AllySpawnPositions = transform.Find("SpawnPositions");
-        // AllySpawnPositions.Find("Spawn1").gameObject.GetComponent<ChampionSpawner>().activateSpawnPoint();
-        // AllySpawnPositions.Find("Spawn2").gameObject.GetComponent<ChampionSpawner>().activateSpawnPoint();
-        // AllySpawnPositions.Find("Spawn3").gameObject.GetComponent<ChampionSpawner>().activateSpawnPoint();
-        // AllySpawnPositions.Find("Spawn4").gameObject.GetComponent<ChampionSpawner>().activateSpawnPoint();
+        
         int i = 0;
         foreach (Transform AllySP in AllySpawnPositions)
         {
@@ -84,20 +81,13 @@ public class GameController : MonoBehaviour
                 else if (i==2){
                     i = 0;
                 }
-
-                // i++;
-                // if (i==4){
-                //     i = 0;
-                // }
             }
         }
-
+    }
+    public virtual void SpawnEnemyChampions(){
+        ChampionSpawner Spawner;
         Transform EnemySpawnPositions = transform.Find("EnemySpawnPositions");
-        // EnemySpawnPositions.Find("Spawn1").gameObject.GetComponent<ChampionSpawner>().activateSpawnPoint();
-        // EnemySpawnPositions.Find("Spawn2").gameObject.GetComponent<ChampionSpawner>().activateSpawnPoint();
-        // EnemySpawnPositions.Find("Spawn3").gameObject.GetComponent<ChampionSpawner>().activateSpawnPoint();
-        // EnemySpawnPositions.Find("Spawn4").gameObject.GetComponent<ChampionSpawner>().activateSpawnPoint();
-        i = 1;
+        int i = 1;
         foreach (Transform EnemySP in EnemySpawnPositions)
         {
             Spawner = null;
@@ -112,11 +102,6 @@ public class GameController : MonoBehaviour
                 else if (i==3){
                     i = 1;
                 }
-
-                // i++;
-                // if (i==4){
-                //     i = 0;
-                // }
             }
         }
     }
@@ -128,6 +113,24 @@ public class GameController : MonoBehaviour
             Debug.Log("GAMEOVER !! YOU LOSE.");
         }
         // labelGameOver.SetActive(true);
+
+        // TODO : setNextScene();
+    }
+    private void getPlayerChampionsDetails(){
+        //  foreach spawnpoint
+        //      GET the champPrefabs and objects from global var
+        //      Store them in class var
+    }
+    private void getEnemyChampionsDetails(){
+        //  foreach Enemy spawnpoint
+        //      GET the champPrefabs and objects from global var
+        //      Store them in class var
+    }
+    private void setNextScene(){
+        //  foreach spawnpoint
+        //      Store the champPrefabs and objects from global var
+        //      GET them in class var
+        //  Launch next scene (Champ-Select & placement)
     }
     // public void BirdScore(){
     //     if(!gameOver){

@@ -4,48 +4,18 @@ using UnityEngine;
 
 public class ChampionPrepController : GameController
 {
+    // TODO : GET CHAMPS FROM GLABAL WITH
     private void Start() {
+        // TODO : getPlayerChampionsDetails();
         initChampions();
         SpawnFightingChampions();
+        SpawnSubstituteChampions();
     }
-    public override void SpawnFightingChampions(){
-
+    public void SpawnSubstituteChampions(){
         ChampionSpawner Spawner;
-
-        Transform AllySpawnPositions = transform.Find("SpawnPositions");
-        // AllySpawnPositions.Find("Spawn1").gameObject.GetComponent<ChampionSpawner>().activateSpawnPoint();
-        // AllySpawnPositions.Find("Spawn2").gameObject.GetComponent<ChampionSpawner>().activateSpawnPoint();
-        // AllySpawnPositions.Find("Spawn3").gameObject.GetComponent<ChampionSpawner>().activateSpawnPoint();
-        // AllySpawnPositions.Find("Spawn4").gameObject.GetComponent<ChampionSpawner>().activateSpawnPoint();
-        int i = 0;
-        foreach (Transform AllySP in AllySpawnPositions)
-        {
-            Spawner = null;
-            Spawner = AllySP.gameObject.GetComponent<ChampionSpawner>();
-            if (Spawner != null){
-                Spawner.activateSpawnPoint();
-                Spawner.spawnChampion(Champions[i]);
-
-                if (i==0){
-                    i = 2;
-                }
-                else if (i==2){
-                    i = 0;
-                }
-
-                // i++;
-                // if (i==4){
-                //     i = 0;
-                // }
-            }
-        }
-
         Transform AllySubsSpawnPositions = transform.Find("SubsSpawnPositions");
-        // AllySpawnPositions.Find("Spawn1").gameObject.GetComponent<ChampionSpawner>().activateSpawnPoint();
-        // AllySpawnPositions.Find("Spawn2").gameObject.GetComponent<ChampionSpawner>().activateSpawnPoint();
-        // AllySpawnPositions.Find("Spawn3").gameObject.GetComponent<ChampionSpawner>().activateSpawnPoint();
-        // AllySpawnPositions.Find("Spawn4").gameObject.GetComponent<ChampionSpawner>().activateSpawnPoint();
-        i = 0;
+
+        int i = 1;
         foreach (Transform AllySP in AllySubsSpawnPositions)
         {
             Spawner = null;
@@ -54,18 +24,14 @@ public class ChampionPrepController : GameController
                 Spawner.activateSpawnPoint();
                 Spawner.spawnChampion(Champions[i]);
 
-                if (i==0){
-                    i = 2;
+                if (i==1){
+                    i = 3;
                 }
-                else if (i==2){
-                    i = 0;
+                else if (i==3){
+                    i = 1;
                 }
-
-                // i++;
-                // if (i==4){
-                //     i = 0;
-                // }
             }
         }
     }
+
 }
