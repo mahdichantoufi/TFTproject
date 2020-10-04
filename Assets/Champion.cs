@@ -22,6 +22,7 @@ public class Champion : MonoBehaviour
 
     private float timeSinceLastAttack;
     private bool isAlive;
+    private bool isActive = false;
     
 
     // Start is called before the first frame update
@@ -40,7 +41,12 @@ public class Champion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isAlive){
+        if(isActive)
+            Debug.Log("This is an active Item.");
+        else
+            Debug.Log("This is an inactive Item.");
+        if(isAlive && isActive){
+            Debug.Log("This is an alive/active Item.");
             bool moved = false;
             timeSinceLastAttack += Time.deltaTime;
             GameObject closestAlly = FindClosestAlly();
@@ -64,8 +70,10 @@ public class Champion : MonoBehaviour
                 else
                     GameController.instance.AllEnemiesAreDead(false);
             }
-
         }
+    }
+    public void setActive(){
+        this.isActive = true;
     }
     
 	GameObject FindClosestEnemy()

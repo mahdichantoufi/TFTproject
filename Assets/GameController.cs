@@ -19,7 +19,7 @@ public class GameController : MonoBehaviour
     public GameObject EnemyChampionPrefab4;
     // public GameObject labelGameOver;
     // public Text labelScore;
-    private GameObject[] Champions;
+    public GameObject[] Champions;
     private GameObject[] EnemyChampions;
 
     private void Awake()
@@ -38,7 +38,7 @@ public class GameController : MonoBehaviour
         SpawnFightingChampions();
     }
 
-    private void initChampions(){
+    public void initChampions(){
 
         Champions = new GameObject[4];
         Champions[0] = ChampionPrefab1;
@@ -60,7 +60,7 @@ public class GameController : MonoBehaviour
             EC.GetComponent<Champion>().gameController = this;
         }
     }
-    private void SpawnFightingChampions(){
+    public virtual void SpawnFightingChampions(){
 
         ChampionSpawner Spawner;
 
