@@ -10,13 +10,13 @@ public class ChampionPrepController : GameController
     // TODO : GET CHAMPS FROM GLABAL WITH
     private PlayerData playerData;
     private void Start()
-  {
+    {
     initChampions();
     initDragandDrop();
     playerData = GameObject.FindWithTag("GameManager").transform.GetComponent<GameManager>().GetPlayer();
     SpawnFightingChampions();
     SpawnSubstituteChampions();
-  }
+    }
     public void UpExperience()
     {
         if (this.playerData.GetGold() >= 4)
