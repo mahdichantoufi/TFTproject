@@ -33,4 +33,14 @@ public class GameManager : MonoBehaviour
     public void SetPlayerUsername(string username){
         this.playerData.SetUsername(username);
     }
+    public void UpExperience()
+    {
+        if(this.playerData.GetGold() >= 4)
+        {
+            this.playerData.AddGold(-4);
+            this.playerData.AddXp(2);
+        }
+        UnityEngine.Debug.Log(playerData.GetGold());
+        UnityEngine.Debug.Log("          ");
+    }
 }

@@ -3,31 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Reflection;
 
 public class ChampionPrepController : GameController
 {
-    public TextMeshProUGUI username;
-    public TextMeshProUGUI gold;
-    public TextMeshProUGUI xp;
     // TODO : GET CHAMPS FROM GLABAL WITH
     private PlayerData playerData;
     private void Start()
   {
     initChampions();
     initDragandDrop();
-    getPlayerChampionsDetails();
 
     SpawnFightingChampions();
     SpawnSubstituteChampions();
-  }
-
-  private void getPlayerChampionsDetails()
-  {
-    playerData = GameObject.FindWithTag("GameManager").transform.GetComponent<GameManager>().GetPlayer();
-    playerData.LogPrint();
-    xp.text = "XP : " + playerData.GetXp().ToString();
-    gold.text = "Gold : " + playerData.GetGold().ToString();
-    username.text = "Hello " + playerData.GetUsername() + " :D";
   }
 
   private void initDragandDrop(){
