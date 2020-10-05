@@ -92,7 +92,6 @@ public class Champion : MonoBehaviour
 		}
         return closestEnemy;
 	}
-    // TODO : Create Path Finding to avoid Ally GameObjects
 	GameObject FindClosestAlly()
 	{
     	float distanceToClosestAlly = 4.0f;	
