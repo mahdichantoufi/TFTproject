@@ -1127,6 +1127,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 920296455}
   m_CullTransparentMesh: 0
+--- !u!1 &1072834370 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 204644364457544733, guid: 177c02324377849e4aac1242ec533bcf,
+    type: 3}
+  m_PrefabInstance: {fileID: 1981653796}
+  m_PrefabAsset: {fileID: 0}
+--- !u!154 &1072834371
+TerrainCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072834370}
+  m_Material: {fileID: 0}
+  m_Enabled: 1
+  m_TerrainData: {fileID: 0}
+  m_EnableTreeColliders: 0
 --- !u!1 &1086228967
 GameObject:
   m_ObjectHideFlags: 0
@@ -1269,7 +1286,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1104542577}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 11a3e85b4506744a397145ffb7077d63, type: 3}
   m_Name: 

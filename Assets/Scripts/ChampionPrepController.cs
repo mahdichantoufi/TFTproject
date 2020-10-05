@@ -13,9 +13,8 @@ public class ChampionPrepController : GameController
   {
     initChampions();
     initDragandDrop();
-    playerData = playerData = GameObject.FindWithTag("GameManager").transform.GetComponent<GameManager>().GetPlayer();
-        UnityEngine.Debug.Log(playerData);
-        SpawnFightingChampions();
+    playerData = GameObject.FindWithTag("GameManager").transform.GetComponent<GameManager>().GetPlayer();
+    SpawnFightingChampions();
     SpawnSubstituteChampions();
   }
     public void UpExperience()
