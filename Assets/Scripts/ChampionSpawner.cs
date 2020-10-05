@@ -17,11 +17,11 @@ public class ChampionSpawner : MonoBehaviour
     public void spawnChampion(GameObject ChampionPrefab)
     {
         if(!championPopped && containsChampion){
-            ChampionPrefab = Instantiate(ChampionPrefab, SpawnPosition, Quaternion.identity);//,Champs);
+            GameObject championPrefab = Instantiate(ChampionPrefab, SpawnPosition, Quaternion.identity);//,Champs);
             containsChampion = true;
             championPopped = true;
             if(championIsActive){
-                ChampionPrefab.gameObject.GetComponent<Champion>().setActive();
+                championPrefab.gameObject.GetComponent<Champion>().setActive();
             }
         }
 

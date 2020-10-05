@@ -6,6 +6,8 @@ public class Champion : MonoBehaviour
 {
 	public Animator animator;
     public GameController gameController;
+    public string championName;
+    public int price;
     public int attackDamage;
     public int health;
     public int shield;

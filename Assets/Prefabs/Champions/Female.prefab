@@ -1073,6 +1073,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   gameController: {fileID: 0}
+  championName: Ana
+  price: 2
   attackDamage: 10
   health: 100
   shield: 0

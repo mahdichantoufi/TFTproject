@@ -24,7 +24,8 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
-        if(instance==null)
+        DontDestroyOnLoad(gameObject);
+        if (instance==null)
         {
             instance = this;
         }
@@ -40,6 +41,8 @@ public class GameController : MonoBehaviour
         SpawnFightingChampions();
         SpawnEnemyChampions();
     }
+
+
 
     public void initChampions(){
         Champions = new GameObject[4];
@@ -106,6 +109,7 @@ public class GameController : MonoBehaviour
             }
         }
     }
+
     public void AllEnemiesAreDead(bool Win){
         gameOver = true;
         if(Win){
@@ -139,4 +143,9 @@ public class GameController : MonoBehaviour
     //         labelScore.text = "Score : " + scoreCount.ToString();
     //     }
     // }
+    public Champion GetChampion(int index)
+    {
+        return Champions[index].GetComponent<Champion>();
+
+    }
 }

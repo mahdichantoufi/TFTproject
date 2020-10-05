@@ -12,11 +12,17 @@ public class UpdateUI : MonoBehaviour
     public TextMeshProUGUI level;
     public Image healthBar;
     public Image xpBar;
+
+    public TextMeshProUGUI characterName;
+
     private PlayerData playerData;
+    private Champion champion;
 
     // Start is called before the first frame update
     void Start()
     {
+        champion = GameController.instance.GetChampion(0);
+        characterName.text = champion.championName;
         playerData = GameObject.FindWithTag("GameManager").transform.GetComponent<GameManager>().GetPlayer();
         username.text = playerData.GetUsername();
     }

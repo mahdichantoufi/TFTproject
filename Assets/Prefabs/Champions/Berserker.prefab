@@ -62,6 +62,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   gameController: {fileID: 0}
+  championName: Berserker
+  price: 4
   attackDamage: 20
   health: 100
   shield: 0

@@ -61,6 +61,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
+  gameController: {fileID: 0}
+  championName: HeavyBryan
+  price: 5
   attackDamage: 30
   health: 200
   shield: 0
