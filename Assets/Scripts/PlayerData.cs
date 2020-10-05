@@ -11,7 +11,8 @@ public class PlayerData
     public int health;
     public bool uptodate;
     private PlacementData placementData;
-
+    private int NumberOfFightingSpawns = 9;
+    private int NumberOfSubsSpawns = 10;
     public PlayerData (){
         this.username = string.Empty;
         this.earnedGold = 50;
@@ -19,6 +20,7 @@ public class PlayerData
         this.level = 1;
         this.health = 100;
         this.uptodate = false;
+        this.placementData = new PlacementData(NumberOfFightingSpawns,NumberOfSubsSpawns);
     }
     public void SetUsername(string username) {
         this.username = username;
@@ -67,5 +69,8 @@ public class PlayerData
         Debug.Log("earnedGold "+ this.earnedGold.ToString());
         Debug.Log("experiencePoints "+ this.experiencePoints.ToString());
         Debug.Log("level " + this.level.ToString());
+    }
+    public PlacementData GetPlacementData(){
+        return this.placementData;
     }
 }
