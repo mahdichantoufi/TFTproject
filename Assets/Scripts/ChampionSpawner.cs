@@ -39,4 +39,7 @@ public class ChampionSpawner : MonoBehaviour
     public bool spawnPointIsActive(){
         return containsChampion;
     }
+    public bool spawnedChampionIsDraggable(){
+        return (containsChampion && !championIsActive);
+    }
 }
