@@ -65,8 +65,8 @@ MonoBehaviour:
   championName: HeavyBryan
   price: 5
   attackDamage: 30
-  health: 200
-  shield: 0
+  health: 100
+  shield: 3
   speed: 0.3
   attackRange: 1
   attackCooldown: 3
