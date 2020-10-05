@@ -2651,9 +2651,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9211b0034631bc4da63ca4a80776106, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  username: 
-  gold: 0
-  xp: 0
 --- !u!4 &1381215982
 Transform:
   m_ObjectHideFlags: 0
@@ -2787,7 +2784,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1381215981}
-        m_MethodName: SetUsername
+        m_MethodName: SetPlayerUsername
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
