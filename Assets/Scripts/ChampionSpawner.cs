@@ -23,7 +23,7 @@ public class ChampionSpawner : MonoBehaviour
             if(championIsActive){
                 championInstance.gameObject.GetComponent<Champion>().setActive();
             }
-        return championInstance;
+            return championInstance;
         }
         return null;
     }
