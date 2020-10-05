@@ -5997,6 +5997,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1104542579}
     m_Modifications:
+    - target: {fileID: 1081092702258727406, guid: 6eebfe9d79ab74e14a3335db1d2bf830,
+        type: 3}
+      propertyPath: m_Name
+      value: SubsSpawn9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1842189787115924057, guid: 6eebfe9d79ab74e14a3335db1d2bf830,
+        type: 3}
+      propertyPath: m_Name
+      value: SubsSpawn8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1929189388581730559, guid: 6eebfe9d79ab74e14a3335db1d2bf830,
+        type: 3}
+      propertyPath: m_Name
+      value: SubsSpawn3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2545343394415357676, guid: 6eebfe9d79ab74e14a3335db1d2bf830,
+        type: 3}
+      propertyPath: m_Name
+      value: SubsSpawn5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4007477338041122518, guid: 6eebfe9d79ab74e14a3335db1d2bf830,
+        type: 3}
+      propertyPath: m_Name
+      value: SubsSpawn7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4661547976619638625, guid: 6eebfe9d79ab74e14a3335db1d2bf830,
+        type: 3}
+      propertyPath: m_Name
+      value: SubsSpawn2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003527603523445119, guid: 6eebfe9d79ab74e14a3335db1d2bf830,
+        type: 3}
+      propertyPath: m_Name
+      value: SubsSpawn4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7052070586292762577, guid: 6eebfe9d79ab74e14a3335db1d2bf830,
+        type: 3}
+      propertyPath: m_Name
+      value: SubsSpawn1
+      objectReference: {fileID: 0}
     - target: {fileID: 7725194296379829170, guid: 6eebfe9d79ab74e14a3335db1d2bf830,
         type: 3}
       propertyPath: m_Name
@@ -6056,6 +6096,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8989043609739434155, guid: 6eebfe9d79ab74e14a3335db1d2bf830,
+        type: 3}
+      propertyPath: m_Name
+      value: SubsSpawn6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9105269692352036368, guid: 6eebfe9d79ab74e14a3335db1d2bf830,
+        type: 3}
+      propertyPath: m_Name
+      value: SubsSpawn10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6eebfe9d79ab74e14a3335db1d2bf830, type: 3}

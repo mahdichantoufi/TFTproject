@@ -6,7 +6,7 @@ public class DragAndDrop : MonoBehaviour
 {
     public ChampionPrepController championPrepController;
     public List<Vector3> SpawnPositions = new List<Vector3>();
-
+    
     private TerrainCollider terrainCollider;
     private bool isDragging = false;
     // Start is called before the first frame update
@@ -24,14 +24,29 @@ public class DragAndDrop : MonoBehaviour
             Vector3 clickWorldCoord = getWorldCoordonatesFromClick(Input.mousePosition);
             if ( clickWorldCoord.x != -1 && clickWorldCoord.y != -1 && clickWorldCoord.z != -1 )
             {
-                Debug.Log(checkNearestActiveSpawner(clickWorldCoord));
-            }
+                // Input.GetMouseButtonDown(0) && !isDragging
+                // TODO : Select Dragged character Transform if there is one to drag.
+                // TODO : keep its instance and get it from The Spawner
+                Debug.Log("button down in bounds. " + checkNearestActiveSpawner(clickWorldCoord));
+            } //else we do nothing 
+                Debug.Log("button down but out of bounds. ");
         } else if (Input.GetMouseButtonUp(0) && isDragging){
             this.isDragging = false;
             Vector3 clickWorldCoord = getWorldCoordonatesFromClick(Input.mousePosition);
             if ( clickWorldCoord.x != -1 && clickWorldCoord.y != -1 && clickWorldCoord.z != -1 )
             {
-                Debug.Log(checkNearestActiveSpawner(clickWorldCoord));
+                //TODO : Input.GetMouseButtonUp(0) && !isDragging
+                Debug.Log("button up " + checkNearestActiveSpawner(clickWorldCoord));
+            } else
+                Debug.Log("button down but out of bounds. ");
+                // Button down out of bounds && Input.GetMouseButtonDown(0) && !isDragging
+                // TODO : Get character back to its original place
+        } else if (isDragging){
+            Vector3 clickWorldCoord = getWorldCoordonatesFromClick(Input.mousePosition);
+            if ( clickWorldCoord.x != -1 && clickWorldCoord.y != -1 && clickWorldCoord.z != -1 )
+            {
+                //TODO : Move character while dragging
+                Debug.Log("move character");
             }
         }
     }
@@ -49,13 +64,13 @@ public class DragAndDrop : MonoBehaviour
 	GameObject checkNearestActiveSpawner(Vector3 clickPos)
 	{
         Debug.Log(clickPos);
-    	float distanceToClosestSpawnPoint = 5.0f;
+    	float distanceToClosestSpawnPoint = 100f;
         Transform closestSpawner = null;
         Transform allySubsSpawnPositions = transform.Find("SubsSpawnPositions");
         foreach (Transform AllySSP in allySubsSpawnPositions)
         {
             float distanceToclick = Vector3.Distance (AllySSP.position, clickPos);
-            if (distanceToclick < distanceToclick) {
+            if (distanceToclick < distanceToClosestSpawnPoint) {
                 ChampionSpawner championSpawner = AllySSP.gameObject.GetComponent<ChampionSpawner>();
                 if (championSpawner != null && championSpawner.spawnedChampionIsDraggable())
                 {

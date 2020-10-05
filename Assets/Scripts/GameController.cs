@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
     public static GameController instance;
+    public PlayerData playerData;
 
     public bool gameOver = false;
     public GameObject ChampionPrefab1;
@@ -37,6 +38,9 @@ public class GameController : MonoBehaviour
     private void Start() {
         // TODO : getPlayerChampionsDetails();
         // TODO : getEnemyChampionsDetails();
+        playerData = GameObject.FindWithTag("GameManager")
+            .transform.GetComponent<GameManager>()
+                .GetPlayer();
         initChampions();
         SpawnFightingChampions();
         SpawnEnemyChampions();
