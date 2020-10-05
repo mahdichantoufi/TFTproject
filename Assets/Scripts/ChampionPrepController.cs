@@ -13,12 +13,21 @@ public class ChampionPrepController : GameController
   {
     initChampions();
     initDragandDrop();
-
-    SpawnFightingChampions();
+    playerData = playerData = GameObject.FindWithTag("GameManager").transform.GetComponent<GameManager>().GetPlayer();
+        UnityEngine.Debug.Log(playerData);
+        SpawnFightingChampions();
     SpawnSubstituteChampions();
   }
+    public void UpExperience()
+    {
+        if (this.playerData.GetGold() >= 4)
+        {
+            this.playerData.AddGold(-4);
+            this.playerData.AddXp(2);
+        }
+    }
 
-  private void initDragandDrop(){
+    private void initDragandDrop(){
         transform.GetComponent<DragAndDrop>().setController(this);
     }
     public void SpawnSubstituteChampions(){

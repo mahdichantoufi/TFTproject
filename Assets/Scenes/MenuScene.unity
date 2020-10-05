@@ -146,7 +146,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 53033937}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &53033939
 Camera:
   m_ObjectHideFlags: 0
@@ -2825,7 +2825,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.46666667}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -4095,7 +4095,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 1426063360
-  m_fontColor: {r: 0, g: 0, b: 0, a: 0.33333334}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 0.24705882}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

@@ -10,6 +10,7 @@ public class PlayerData
     public float experiencePoints;
     public int level;
     public int health;
+    public bool uptodate;
 
     public PlayerData (){
         this.username = string.Empty;
@@ -17,22 +18,27 @@ public class PlayerData
         this.experiencePoints = 0;
         this.level = 1;
         this.health = 100;
+        this.uptodate = false;
     }
     public void SetUsername(string username) {
-        this.username = username; 
+        this.username = username;
+        this.uptodate = false;
     }
     public void AddGold(int gold){
         earnedGold = earnedGold + gold;
+        this.uptodate = false;
     }
     public void AddXp(int xp){
         experiencePoints = experiencePoints + xp;
-        if (experiencePoints > 4) level = 2;
-        else if (experiencePoints > 10) level = 3;
-        else if (experiencePoints > 20) level = 3;
+        if (experiencePoints >= 4) this.level = 2;
+        if (experiencePoints >= 10) this.level = 3;
+        if (experiencePoints >= 20) this.level = 4;
+        this.uptodate = false;
     }
     public void AddHealth(int health)
     {
         this.health = this.health + health;
+        this.uptodate = false;
     }
     public string GetUsername(){
         return this.username;
@@ -48,7 +54,7 @@ public class PlayerData
         else return 0.0f;
     }
     public int GetLevel(){
-        return level;
+        return this.level;
     }
     public int GetHealth()
     {
@@ -60,5 +66,6 @@ public class PlayerData
         Debug.Log("username "+ this.username);
         Debug.Log("earnedGold "+ this.earnedGold.ToString());
         Debug.Log("experiencePoints "+ this.experiencePoints.ToString());
+        Debug.Log("level " + this.level.ToString());
     }
 }
