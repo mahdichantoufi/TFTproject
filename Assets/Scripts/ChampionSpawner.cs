@@ -14,17 +14,18 @@ public class ChampionSpawner : MonoBehaviour
     private void Start() {
         SpawnPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
     }
-    public void spawnChampion(GameObject ChampionPrefab)
+    public GameObject spawnChampion(GameObject ChampionPrefab)
     {
         if(!championPopped && containsChampion){
-            GameObject championPrefab = Instantiate(ChampionPrefab, SpawnPosition, Quaternion.identity);//,Champs);
+            GameObject championInstance = Instantiate(ChampionPrefab, SpawnPosition, Quaternion.identity);//,Champs);
             containsChampion = true;
             championPopped = true;
             if(championIsActive){
-                championPrefab.gameObject.GetComponent<Champion>().setActive();
+                championInstance.gameObject.GetComponent<Champion>().setActive();
             }
+        return championInstance;
         }
-
+        return null;
     }
     
     public void activateSpawnPoint(){

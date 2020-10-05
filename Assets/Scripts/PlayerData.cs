@@ -5,12 +5,12 @@ using UnityEngine;
 public class PlayerData
 {
     public string username;
-
     public int earnedGold;
     public float experiencePoints;
     public int level;
     public int health;
     public bool uptodate;
+    private PlacementData placementData;
 
     public PlayerData (){
         this.username = string.Empty;
