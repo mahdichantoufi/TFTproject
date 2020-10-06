@@ -4,28 +4,29 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Reflection;
+using System.Security.Cryptography;
 
-public class ChampionPrepController : GameController
+public class ChampionPrepController
 {
+    protected PlayerData playerData;
+    protected Transform transform;
     // TODO : GET CHAMPS FROM GLABAL WITH
-    private void Start()
+    public ChampionPrepController()
     {
-        initChampions();
-        initDragandDrop();
-        playerData = GameManager.instance
-            .transform.GetComponent<GameManager>()
-                .GetPlayer();
-        // SpawnFightingChampions();
-        // SpawnSubstituteChampions();
-
+        transform = GameManager.instance.transform;
+        playerData = GameManager.instance.GetPlayer();
+        UnityEngine.Debug.Log(playerData);
     }
+
+
     public void addPurchasedChampion(int prefabIndex){
 
         ChampionSpawner SubSpawner = getFirstAvailableSubsituteSpawnPoint();
         Debug.Log(SubSpawner);
         if (SubSpawner != null){
             SubSpawner.activateSpawnPoint();
-            GameObject instanceP = SubSpawner.spawnChampion(Champions[prefabIndex]);
+            GameObject instanceP = SubSpawner.spawnChampion(GameManager.instance.GetChampions()[prefabIndex]);
+            UnityEngine.Debug.Log(playerData);
             playerData.GetPlacementData().addChampionInstance(
                 SubSpawner.gameObject.name, 
                 instanceP, prefabIndex, false);
@@ -66,18 +67,6 @@ public class ChampionPrepController : GameController
         }
         
     }
-    public void UpExperience()
-    {
-        if (this.playerData.GetGold() >= 4)
-        {
-            this.playerData.AddGold(-4);
-            this.playerData.AddXp(2);
-        }
-    }
-
-    private void initDragandDrop(){
-        transform.GetComponent<DragAndDrop>().setController(this);
-    }
     public void SpawnSubstituteChampions(){
         ChampionSpawner Spawner;
         Transform AllySubsSpawnPositions = transform.Find("SubsSpawnPositions");
@@ -89,7 +78,7 @@ public class ChampionPrepController : GameController
             Spawner = AllySP.gameObject.GetComponent<ChampionSpawner>();
             if (Spawner != null){
                 Spawner.activateSpawnPoint();
-                Spawner.spawnChampion(Champions[i]);
+                Spawner.spawnChampion(GameManager.instance.GetChampions()[i]);
 
                 if (i==1){
                     i = 3;

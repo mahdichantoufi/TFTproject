@@ -7,8 +7,24 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour 
 {
     public static GameManager instance = null;
+    private GameController gameController;
+    private ChampionPrepController championPrepController;
     private PlayerData playerData;
     private string username;
+
+
+
+    public GameObject ChampionPrefab1;
+    public GameObject ChampionPrefab2;
+    public GameObject ChampionPrefab3;
+    public GameObject ChampionPrefab4;
+    public GameObject EnemyChampionPrefab1;
+    public GameObject EnemyChampionPrefab2;
+    public GameObject EnemyChampionPrefab3;
+    public GameObject EnemyChampionPrefab4;
+
+    private GameObject[] Champions;
+    private GameObject[] EnemyChampions;
 
     void Awake()
     {
@@ -26,7 +42,25 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        
+        Champions = new GameObject[4];
+        EnemyChampions = new GameObject[4];
+        Champions[0] = ChampionPrefab1;
+        Champions[1] = ChampionPrefab2;
+        Champions[2] = ChampionPrefab3;
+        Champions[3] = ChampionPrefab4;
+
+        EnemyChampions[0] = EnemyChampionPrefab1;
+        EnemyChampions[1] = EnemyChampionPrefab2;
+        EnemyChampions[2] = EnemyChampionPrefab3;
+        EnemyChampions[3] = EnemyChampionPrefab4;
+    }
+    public GameController GetGameController()
+    {
+        return this.gameController;
+    }
+    public ChampionPrepController GetChampionPrepController()
+    {
+        return this.championPrepController;
     }
 
     public PlayerData GetPlayer(){
@@ -38,12 +72,14 @@ public class GameManager : MonoBehaviour
     }
     public void Battle()
     {
+        gameController = new GameController();
         SceneManager.LoadScene(2);
     }
     public void Play()
     {
         UnityEngine.Debug.Log("play");
         this.playerData = new PlayerData(username);
+        championPrepController = new ChampionPrepController();
         SceneManager.LoadScene(1);
     }
 
@@ -61,6 +97,19 @@ public class GameManager : MonoBehaviour
     {
         UnityEngine.Debug.Log("pause");
         SceneManager.LoadScene(0);
+    }
+    public Champion GetChampion(int index)
+    {
+        return Champions[index].GetComponent<Champion>();
+
+    }
+    public GameObject[] GetChampions()
+    {
+        return this.Champions;
+    }
+    public GameObject[] GetEnemyChampions()
+    {
+        return this.EnemyChampions;
     }
 
 
