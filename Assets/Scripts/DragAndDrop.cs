@@ -19,7 +19,6 @@ public class DragAndDrop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("start()");
         championPrepController = GameManager.instance.GetChampionPrepController();
         transform = GameManager.instance.transform;
         terrainCollider = Terrain.activeTerrain.GetComponent<TerrainCollider>();
@@ -36,9 +35,9 @@ public class DragAndDrop : MonoBehaviour
                 if (fromSpawn != null)
                 {
                     this.isDragging = true;
+                    this.DraggedInstance = playerPlacementData.getSpawnActiveInstance(fromSpawn.name);
+                    this.DraggedChampOriginalPosition = this.DraggedInstance.transform.position;
                 }
-                this.DraggedInstance = playerPlacementData.getSpawnActiveInstance(fromSpawn.name);
-                this.DraggedChampOriginalPosition = this.DraggedInstance.transform.position;
             } //else we do nothing 
         } 
         else if (Input.GetMouseButtonUp(0) && isDragging){

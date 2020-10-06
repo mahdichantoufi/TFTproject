@@ -15,7 +15,6 @@ public class ChampionPrepController
     {
         transform = GameManager.instance.transform;
         playerData = GameManager.instance.GetPlayer();
-        UnityEngine.Debug.Log(playerData);
     }
 
 
@@ -48,20 +47,22 @@ public class ChampionPrepController
         bool foundTo = false;
         ChampionSpawner FromScript = From.GetComponent<ChampionSpawner>();
         ChampionSpawner ToScript = To.GetComponent<ChampionSpawner>();
+
+        Debug.Log("From is fighter ? " + FromScript.FightingSpawner);
+        Debug.Log("To is fighter ? " + ToScript.FightingSpawner);
         Debug.Log("can Move ? " + playerData.canMoveBasedOnLevel(FromScript.FightingSpawner, ToScript.FightingSpawner, ToScript.spawnPointIsActive()));
 
         foundFrom = playerData.GetPlacementData().findBySpawnerName(From.name);
         if(foundFrom){
             // SpawnFrom contient un champion
-            Debug.Log("SpawnFrom contient un champion");
             if (!playerData.canMoveBasedOnLevel(FromScript.FightingSpawner, ToScript.FightingSpawner, ToScript.spawnPointIsActive()))
                 return false;
                 // Le player a placé autant de champions sur le terrain qu'autorisés par son level
 
             foundTo = playerData.GetPlacementData().findBySpawnerName(To.name);
             if (!foundTo) {
+                Debug.Log("SpawnFrom Et SpawnTo contiennent un champion");
                 // SpawnFrom contient un champion mais pas SpawnTo
-                Debug.Log("SpawnFrom contient un champion mais pas SpawnTo");
                 FromScript.desactivateSpawnPoint();
                 ToScript.activateSpawnPoint();
                 playerData.GetPlacementData().setSpawner(From.name, To.name, To.transform.position, ToScript.FightingSpawner);
@@ -72,7 +73,10 @@ public class ChampionPrepController
                 // From and To : Switch the SpawnNames
                 // From and !To : Change the SpawnName
                 // !From : Error
-                Debug.Log("SpawnFrom Et SpawnTo contiennent un champion");
+                if (From.name == To.name){
+                    Debug.Log("SpawnFrom Et SpawnTo sont identiques");
+                    return false;
+                }
                 playerData.GetPlacementData().switchSpawners(From, To);
             }
             return true;
