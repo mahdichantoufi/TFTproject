@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DragAndDrop : MonoBehaviour
 {
-    public ChampionPrepController championPrepController;
+    private ChampionPrepController championPrepController;
     
     private TerrainCollider terrainCollider;
     private PlacementData playerPlacementData;
@@ -17,8 +17,9 @@ public class DragAndDrop : MonoBehaviour
     void Start()
     {
         Debug.Log("start()");
+        championPrepController = (ChampionPrepController)ChampionPrepController.instance;
         terrainCollider = Terrain.activeTerrain.GetComponent<TerrainCollider>();
-        playerPlacementData = GameObject.FindWithTag("GameManager")
+        playerPlacementData = GameManager.instance
             .transform.GetComponent<GameManager>()
                 .GetPlayer().GetPlacementData();
     }

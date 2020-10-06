@@ -36,6 +36,10 @@ public class GameManager : MonoBehaviour
         UnityEngine.Debug.Log(username);
         this.username = username;
     }
+    public void Battle()
+    {
+        SceneManager.LoadScene(2);
+    }
     public void Play()
     {
         UnityEngine.Debug.Log("play");

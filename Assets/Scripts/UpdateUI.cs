@@ -15,6 +15,7 @@ public class UpdateUI : MonoBehaviour
     public Image xpBar;
 
     private ChampionPrepController gameController;
+    private GameManager gameManager;
 
     private PlayerData playerData;
     private int[] championsIndex;
@@ -24,6 +25,7 @@ public class UpdateUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameManager.instance;
         gameController = (ChampionPrepController)ChampionPrepController.instance;
         champions = new Champion[4];
         championsIndex = new int[4];
@@ -100,6 +102,10 @@ public class UpdateUI : MonoBehaviour
             playerData.AddGold(-2);
             refreshStore();
         }
+    }
+    public void Battle()
+    {
+        gameManager.Battle();
     }
     public void Quit()
     {
