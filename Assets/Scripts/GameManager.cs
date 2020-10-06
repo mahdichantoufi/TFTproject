@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
         return this.playerData;
     }
     public void SetPlayerUsername(string username){
+        UnityEngine.Debug.Log(username);
         this.username = username;
     }
     public void Play()
@@ -54,6 +55,7 @@ public class GameManager : MonoBehaviour
     }
     public void Pause()
     {
+        UnityEngine.Debug.Log("pause");
         SceneManager.LoadScene(0);
     }
 

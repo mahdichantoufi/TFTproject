@@ -12,7 +12,7 @@ public class ChampionPrepController : GameController
     {
         initChampions();
         initDragandDrop();
-        playerData = GameObject.FindWithTag("GameManager")
+        playerData = GameManager.instance
             .transform.GetComponent<GameManager>()
                 .GetPlayer();
         // SpawnFightingChampions();

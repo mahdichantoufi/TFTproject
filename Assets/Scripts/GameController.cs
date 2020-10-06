@@ -25,7 +25,7 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+     
         if (instance==null)
         {
             instance = this;
@@ -34,11 +34,12 @@ public class GameController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        DontDestroyOnLoad(gameObject);
     }
     private void Start() {
         // TODO : getPlayerChampionsDetails();
         // TODO : getEnemyChampionsDetails();
-        playerData = GameObject.FindWithTag("GameManager")
+        playerData = GameManager.instance
             .transform.GetComponent<GameManager>()
                 .GetPlayer();
         initChampions();

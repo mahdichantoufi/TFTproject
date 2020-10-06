@@ -286,7 +286,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1381215981}
+      - m_Target: {fileID: 1661826128}
         m_MethodName: Play
         m_Mode: 1
         m_Arguments:
@@ -1725,7 +1725,6 @@ GameObject:
   m_Component:
   - component: {fileID: 583425021}
   - component: {fileID: 583425022}
-  - component: {fileID: 583425023}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -1780,19 +1779,6 @@ MonoBehaviour:
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
---- !u!114 &583425023
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 583425020}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96f6b5bdc3a85ed48a40d9e8d942f242, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
 --- !u!1 &609931284
 GameObject:
   m_ObjectHideFlags: 0
@@ -2784,8 +2770,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1381215981}
-        m_MethodName: SetPlayerUsername
+      - m_Target: {fileID: 1661826128}
+        m_MethodName: SetUsername
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2860,7 +2846,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1511751475}
   - component: {fileID: 1511751477}
-  - component: {fileID: 1511751476}
   m_Layer: 5
   m_Name: OptionsMenu
   m_TagString: Untagged
@@ -2892,19 +2877,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0.00006207, y: -8.9}
   m_SizeDelta: {x: 1108.5321, y: 920.8518}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1511751476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1511751474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96f6b5bdc3a85ed48a40d9e8d942f242, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
 --- !u!114 &1511751477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3216,6 +3188,7 @@ GameObject:
   - component: {fileID: 1661826126}
   - component: {fileID: 1661826125}
   - component: {fileID: 1661826127}
+  - component: {fileID: 1661826128}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -3296,6 +3269,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 0
   height: 0
+--- !u!114 &1661826128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1661826123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c14d832bdfdec2244b24c9b631c05dfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1766185349
 GameObject:
   m_ObjectHideFlags: 0
