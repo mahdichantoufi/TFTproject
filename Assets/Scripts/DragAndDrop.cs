@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class DragAndDrop : MonoBehaviour
 {
-    public ChampionPrepController championPrepController;
-    
+    private ChampionPrepController championPrepController;
+    private Transform transform;
+
     private TerrainCollider terrainCollider;
     private PlacementData playerPlacementData;
     private GameObject DraggedInstance;
@@ -18,10 +20,10 @@ public class DragAndDrop : MonoBehaviour
     void Start()
     {
         Debug.Log("start()");
+        championPrepController = GameManager.instance.GetChampionPrepController();
+        transform = GameManager.instance.transform;
         terrainCollider = Terrain.activeTerrain.GetComponent<TerrainCollider>();
-        playerPlacementData = GameObject.FindWithTag("GameManager")
-            .transform.GetComponent<GameManager>()
-                .GetPlayer().GetPlacementData();
+        playerPlacementData = GameManager.instance.GetPlayer().GetPlacementData();
     }
     // Update is called once per frame
     void Update()

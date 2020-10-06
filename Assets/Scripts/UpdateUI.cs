@@ -14,7 +14,8 @@ public class UpdateUI : MonoBehaviour
     public Image healthBar;
     public Image xpBar;
 
-    public ChampionPrepController gameController;
+    private ChampionPrepController gameController;
+    private GameManager gameManager;
 
     private PlayerData playerData;
     private int[] championsIndex;
@@ -24,9 +25,11 @@ public class UpdateUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameManager.instance;
+        gameController = gameManager.GetChampionPrepController();
         champions = new Champion[4];
         championsIndex = new int[4];
-        playerData = GameObject.FindWithTag("GameManager").transform.GetComponent<GameManager>().GetPlayer();
+        playerData = GameManager.instance.GetPlayer();
         username.text = playerData.GetUsername();
         refreshStore();
     }
@@ -59,7 +62,7 @@ public class UpdateUI : MonoBehaviour
             //get 4 random indexes
             championsIndex[i] = (int)Math.Round(UnityEngine.Random.Range(0.0f, 0.3f) * 10.0f);
             //get champions scripts from the right prefab
-            champions[i] = GameController.instance.GetChampion(championsIndex[i]);   
+            champions[i] = GameManager.instance.GetChampion(championsIndex[i]);   
         }
         //get every box 
         Transform panelStore = transform.GetChild(1).GetChild(0);
@@ -89,7 +92,15 @@ public class UpdateUI : MonoBehaviour
         if(playerData.GetGold() >= champions[championsIndex[index]].price && gameController.getFirstAvailableSubsituteSpawnPoint() != null)
         {
             playerData.AddGold(-champions[championsIndex[index]].price);
-            gameController.GetComponent<ChampionPrepController>().addPurchasedChampion(championsIndex[index]);
+            gameController.addPurchasedChampion(championsIndex[index]);
+        }
+    }
+    public void UpExperience()
+    {
+        if (this.playerData.GetGold() >= 4)
+        {
+            this.playerData.AddGold(-4);
+            this.playerData.AddXp(2);
         }
     }
     public void Refresh()
@@ -99,6 +110,10 @@ public class UpdateUI : MonoBehaviour
             playerData.AddGold(-2);
             refreshStore();
         }
+    }
+    public void Battle()
+    {
+        gameManager.Battle();
     }
     public void Quit()
     {

@@ -1,74 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameController : MonoBehaviour
+public class GameController
 {
-    public static GameController instance;
-    public PlayerData playerData;
+    protected PlayerData playerData;
 
     public bool gameOver = false;
-    public GameObject ChampionPrefab1;
-    public GameObject ChampionPrefab2;
-    public GameObject ChampionPrefab3;
-    public GameObject ChampionPrefab4;
-    public GameObject EnemyChampionPrefab1;
-    public GameObject EnemyChampionPrefab2;
-    public GameObject EnemyChampionPrefab3;
-    public GameObject EnemyChampionPrefab4;
     // public GameObject labelGameOver;
     // public Text labelScore;
-    public GameObject[] Champions;
-    private GameObject[] EnemyChampions;
 
-    private void Awake()
+    protected Transform transform;
+
+    public GameController()
     {
-        DontDestroyOnLoad(gameObject);
-        if (instance==null)
-        {
-            instance = this;
-        }
-        else if (instance != this)
-        {
-            Destroy(gameObject);
-        }
-    }
-    private void Start() {
         // TODO : getPlayerChampionsDetails();
         // TODO : getEnemyChampionsDetails();
-        playerData = GameObject.FindWithTag("GameManager")
-            .transform.GetComponent<GameManager>()
-                .GetPlayer();
-        initChampions();
+        transform = GameManager.instance.transform;
+        playerData = GameManager.instance.GetPlayer();
+        UnityEngine.Debug.Log(playerData);
         SpawnFightingChampions();
         SpawnEnemyChampions();
     }
 
-
-
-    public void initChampions(){
-        Champions = new GameObject[4];
-        Champions[0] = ChampionPrefab1;
-        Champions[1] = ChampionPrefab2;
-        Champions[2] = ChampionPrefab3;
-        Champions[3] = ChampionPrefab4;
-        foreach (GameObject C in Champions)
-        {
-            C.GetComponent<Champion>().gameController = this;
-        }
-
-        EnemyChampions = new GameObject[4];
-        EnemyChampions[0] = EnemyChampionPrefab1;
-        EnemyChampions[1] = EnemyChampionPrefab2;
-        EnemyChampions[2] = EnemyChampionPrefab3;
-        EnemyChampions[3] = EnemyChampionPrefab4;
-        foreach (GameObject EC in EnemyChampions)
-        {
-            EC.GetComponent<Champion>().gameController = this;
-        }
-    }
 
     public void SpawnFightingChampions(){
         ChampionSpawner Spawner;
@@ -81,7 +38,7 @@ public class GameController : MonoBehaviour
             Spawner = AllySP.gameObject.GetComponent<ChampionSpawner>();
             if (Spawner != null){
                 Spawner.activateSpawnPoint();
-                Spawner.spawnChampion(Champions[i]);
+                Spawner.spawnChampion(GameManager.instance.GetChampions()[i]);
 
                 if (i==0){
                     i = 2;
@@ -102,7 +59,7 @@ public class GameController : MonoBehaviour
             Spawner = EnemySP.gameObject.GetComponent<ChampionSpawner>();
             if (Spawner != null){
                 Spawner.activateSpawnPoint();
-                Spawner.spawnChampion(EnemyChampions[i]);
+                Spawner.spawnChampion(GameManager.instance.GetEnemyChampions()[i]);
 
                 if (i==1){
                     i = 3;
@@ -147,9 +104,5 @@ public class GameController : MonoBehaviour
     //         labelScore.text = "Score : " + scoreCount.ToString();
     //     }
     // }
-    public Champion GetChampion(int index)
-    {
-        return Champions[index].GetComponent<Champion>();
-
-    }
+ 
 }

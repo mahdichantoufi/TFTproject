@@ -5,7 +5,7 @@ using UnityEngine;
 public class Champion : MonoBehaviour
 {
 	public Animator animator;
-    public GameController gameController;
+    private GameController gameController;
     public string championName;
     public int price;
     public int attackDamage;
@@ -30,6 +30,7 @@ public class Champion : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameController = GameManager.instance.GetGameController();
         gameObject.transform.localScale += new Vector3(1,1,1);
         isAlive = true;
         currentAttackDamage = attackDamage;
@@ -63,9 +64,9 @@ public class Champion : MonoBehaviour
                     Attack(closestEnemy);
             } else if (!moved){
                 if ( gameObject.tag == "Ally")
-                    GameController.instance.AllEnemiesAreDead(true);
+                    gameController.AllEnemiesAreDead(true);
                 else
-                    GameController.instance.AllEnemiesAreDead(false);
+                    gameController.AllEnemiesAreDead(false);
             }
         }
     }
