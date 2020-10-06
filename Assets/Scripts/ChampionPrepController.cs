@@ -15,17 +15,6 @@ public class ChampionPrepController : GameController
         playerData = GameObject.FindWithTag("GameManager")
             .transform.GetComponent<GameManager>()
                 .GetPlayer();
-        addPurchasedChampion(Random.Range(0, 4));
-        addPurchasedChampion(Random.Range(0, 4));
-        addPurchasedChampion(Random.Range(0, 4));
-        addPurchasedChampion(Random.Range(0, 4));
-        addPurchasedChampion(Random.Range(0, 4));
-        addPurchasedChampion(Random.Range(0, 4));
-        addPurchasedChampion(Random.Range(0, 4));
-        addPurchasedChampion(Random.Range(0, 4));
-        addPurchasedChampion(Random.Range(0, 4));
-        addPurchasedChampion(Random.Range(0, 4));
-        addPurchasedChampion(Random.Range(0, 4));
         // SpawnFightingChampions();
         // SpawnSubstituteChampions();
 

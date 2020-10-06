@@ -14,6 +14,8 @@ public class UpdateUI : MonoBehaviour
     public Image healthBar;
     public Image xpBar;
 
+    public ChampionPrepController gameController;
+
     private PlayerData playerData;
     private int[] championsIndex;
     Champion[] champions;
@@ -83,10 +85,11 @@ public class UpdateUI : MonoBehaviour
     }
     public void BuyChampion(int index)
     {
-        if(playerData.GetGold() >= champions[championsIndex[index]].price)
+
+        if(playerData.GetGold() >= champions[championsIndex[index]].price && gameController.getFirstAvailableSubsituteSpawnPoint() != null)
         {
             playerData.AddGold(-champions[championsIndex[index]].price);
-            //envoyer championsIndex[index]
+            gameController.GetComponent<ChampionPrepController>().addPurchasedChampion(championsIndex[index]);
         }
     }
     public void Refresh()
