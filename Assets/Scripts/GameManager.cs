@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour 
 {
     public static GameManager instance = null;
     private PlayerData playerData;
+    private string username;
 
     void Awake()
     {
@@ -24,14 +26,36 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        playerData = new PlayerData();
+        
     }
 
     public PlayerData GetPlayer(){
         return this.playerData;
     }
     public void SetPlayerUsername(string username){
-        this.playerData.SetUsername(username);
+        this.username = username;
     }
-    
+    public void Play()
+    {
+        UnityEngine.Debug.Log("play");
+        this.playerData = new PlayerData(username);
+        SceneManager.LoadScene(1);
+    }
+
+    public void BackToMenu()
+    {
+        UnityEngine.Debug.Log("back");
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
+    public void Pause()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+
 }

@@ -77,7 +77,7 @@ public class DragAndDrop : MonoBehaviour
         ray = Camera.main.ScreenPointToRay(mousePosition);
         RaycastHit hitData;
 
-        if(terrainCollider.Raycast(ray, out hitData, Mathf.Infinity)){
+        if(terrainCollider != null && terrainCollider.Raycast(ray, out hitData, Mathf.Infinity)){
             return hitData.point;
         }
         return new Vector3(-1, -1, -1);

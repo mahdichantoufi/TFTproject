@@ -14,17 +14,21 @@ public class UpdateUI : MonoBehaviour
     public Image healthBar;
     public Image xpBar;
 
+    public ChampionPrepController gameController;
+
     private PlayerData playerData;
     private int[] championsIndex;
+    Champion[] champions;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        champions = new Champion[4];
         championsIndex = new int[4];
-        refreshStore();
         playerData = GameObject.FindWithTag("GameManager").transform.GetComponent<GameManager>().GetPlayer();
         username.text = playerData.GetUsername();
+        refreshStore();
     }
 
     // Update is called once per frame
@@ -47,8 +51,7 @@ public class UpdateUI : MonoBehaviour
     }
 
     public void refreshStore()
-    {
-        Champion[] champions = new Champion[4];
+    {        
         int i;
         //get scripts associated to indexes in gamecontroller data
         for (i = 0; i < championsIndex.Length; i++)
@@ -79,6 +82,27 @@ public class UpdateUI : MonoBehaviour
             //UnityEngine.Debug.Log(text);
             i++;
         }
+    }
+    public void BuyChampion(int index)
+    {
+
+        if(playerData.GetGold() >= champions[championsIndex[index]].price && gameController.getFirstAvailableSubsituteSpawnPoint() != null)
+        {
+            playerData.AddGold(-champions[championsIndex[index]].price);
+            gameController.GetComponent<ChampionPrepController>().addPurchasedChampion(championsIndex[index]);
+        }
+    }
+    public void Refresh()
+    {
+        if(playerData.GetGold() >= 2)
+        {
+            playerData.AddGold(-2);
+            refreshStore();
+        }
+    }
+    public void Quit()
+    {
+        GameObject.FindWithTag("GameManager").transform.GetComponent<GameManager>().Pause();
     }
 
 }

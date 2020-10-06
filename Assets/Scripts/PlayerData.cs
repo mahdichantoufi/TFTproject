@@ -13,18 +13,14 @@ public class PlayerData
     private PlacementData placementData;
     private int NumberOfFightingSpawns = 9;
     private int NumberOfSubsSpawns = 10;
-    public PlayerData (){
-        this.username = string.Empty;
+    public PlayerData (string username){
+        this.username = username;
         this.earnedGold = 50;
         this.experiencePoints = 0;
         this.level = 1;
         this.health = 100;
         this.uptodate = false;
         this.placementData = new PlacementData(NumberOfFightingSpawns,NumberOfSubsSpawns);
-    }
-    public void SetUsername(string username) {
-        this.username = username;
-        this.uptodate = false;
     }
     public void AddGold(int gold){
         earnedGold = earnedGold + gold;
