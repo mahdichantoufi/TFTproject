@@ -7,7 +7,6 @@ using System.Reflection;
 
 public class ChampionPrepController : GameController
 {
-    // TODO : GET CHAMPS FROM GLABAL WITH
     private void Start()
     {
         initChampions();
@@ -15,16 +14,6 @@ public class ChampionPrepController : GameController
         playerData = GameObject.FindWithTag("GameManager")
             .transform.GetComponent<GameManager>()
                 .GetPlayer();
-        addPurchasedChampion(Random.Range(0, 4));
-        addPurchasedChampion(Random.Range(0, 4));
-        addPurchasedChampion(Random.Range(0, 4));
-        addPurchasedChampion(Random.Range(0, 4));
-        addPurchasedChampion(Random.Range(0, 4));
-        addPurchasedChampion(Random.Range(0, 4));
-        addPurchasedChampion(Random.Range(0, 4));
-        addPurchasedChampion(Random.Range(0, 4));
-        addPurchasedChampion(Random.Range(0, 4));
-        addPurchasedChampion(Random.Range(0, 4));
         addPurchasedChampion(Random.Range(0, 4));
         // SpawnFightingChampions();
         // SpawnSubstituteChampions();
@@ -54,6 +43,29 @@ public class ChampionPrepController : GameController
             }
         }
         return null;
+    }
+
+    public void switchChampionsInstances(GameObject From, GameObject To){
+        bool foundFrom = false;
+        bool foundTo = false;
+
+        foundFrom = playerData.GetPlacementData().findBySpawnerName(From.name);
+        if(foundFrom){
+            foundTo = playerData.GetPlacementData().findBySpawnerName(To.name);
+            // Check if found
+            // From and To : Switch the SpawnNames
+            // From and !To : Change the SpawnName
+            // !From : Error
+            if (foundFrom && !foundTo) {
+                From.GetComponent<ChampionSpawner>().desactivateSpawnPoint();
+                To.GetComponent<ChampionSpawner>().activateSpawnPoint();
+                playerData.GetPlacementData().setSpawner(From.name, To.name, To.transform.position);
+            } else if (foundFrom && foundTo) {
+                playerData.GetPlacementData().setSpawner(From.name, To.name, To.transform.position);
+                playerData.GetPlacementData().setSpawner(To.name, From.name, From.transform.position);
+            }
+        }
+        
     }
     public void UpExperience()
     {

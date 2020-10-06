@@ -9,7 +9,6 @@ public class ChampionSpawner : MonoBehaviour
     private bool championPopped = false;
     private bool containsChampion = false;
     private Vector3 SpawnPosition;
-    private GameObject ChampionPrefab;
 
     private void Start() {
         SpawnPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
@@ -32,8 +31,6 @@ public class ChampionSpawner : MonoBehaviour
         containsChampion = true;
     }
     public void desactivateSpawnPoint(){
-        Destroy(ChampionPrefab.gameObject);
-        ChampionPrefab = null;
         championPopped = false;
         containsChampion = false;
     }

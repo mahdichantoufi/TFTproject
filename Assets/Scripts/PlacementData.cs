@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class PlacementData
 {
+    private int maximumFighterNb;
+    private int actualFighterNb;
+    private int maximumSubstitutesNb;
+    private int actualSubstitutesNb;
+
     public class ChampInstanceData{
         public string SpawnName;
         public int PrefabIndex;
@@ -14,10 +19,6 @@ public class PlacementData
             this.PrefabIndex = prefabIndex;
         }
     }
-    private int maximumFighterNb;
-    private int actualFighterNb;
-    private int maximumSubstitutesNb;
-    private int actualSubstitutesNb;
     private List<ChampInstanceData> Fighters;
     private List<ChampInstanceData> Substitutes;
 
@@ -35,7 +36,13 @@ public class PlacementData
     public bool isThereAnyFreeSpawnPoints(){
         return !((actualFighterNb == maximumFighterNb) && (actualSubstitutesNb == maximumSubstitutesNb));
     }
-    public void addChampionInstance(string spawnName, GameObject championInstance, int prefabIndex, bool fighter){
+    
+    public void addChampionInstance(
+        string spawnName, 
+        GameObject championInstance, 
+        int prefabIndex, 
+        bool fighter)
+    {
         ChampInstanceData newChampInstance= new ChampInstanceData(spawnName, championInstance, prefabIndex);
         if (isThereAnyFreeSpawnPoints() && newChampInstance != null) {
             if (fighter) {
@@ -45,32 +52,67 @@ public class PlacementData
             }
         }
     }
-    public void switchChampionsInstances(string spawnNameFrom, string spawnNameTo){
-        ChampInstanceData spawnDataFrom = null;
-        ChampInstanceData spawnDataTo = null;
-        bool foundFrom = false;
-        bool foundTo = false;
+    public void setSpawner(string spawnNameFrom, string spawnNameTo, Vector3 spawnerPositionTo){
+        Debug.Log("moving ... from "+spawnNameFrom+" to "+spawnNameTo+" in pos "+spawnerPositionTo);
+        if(findInFightersByName(spawnNameFrom)){
+            Debug.Log("fighter");
+            ChampInstanceData champData = findInFightersByNameprivate(spawnNameFrom);
+            champData.SpawnName = spawnNameTo;
+            champData.ChampionInstance.transform.position = spawnerPositionTo;
+        }
+        else if(findInSubstitutesByName(spawnNameFrom)){
+            Debug.Log("sub");
+            ChampInstanceData champData = findInSubstitutesByNameprivate(spawnNameFrom);
+            champData.SpawnName = spawnNameTo;
+            champData.ChampionInstance.transform.position = spawnerPositionTo;
+        }
+    }
+    public void deleteChampionWithSpawnName(string SpawnerName){
 
-        Debug.Log("button downe on " + spawnNameFrom);
-        Debug.Log("button up on " + spawnNameTo);
-        // TODO : do the same for substitutes
-        // foreach (ChampInstanceData CID in Fighters)
-        // {
-        //     if (!foundFrom && CID.SpawnName == spawnNameFrom){
-        //         spawnDataFrom = CID;
-        //         // TODO :
-        //         foundFrom = true;
-        //     } else if (!foundTo && CID.SpawnName == spawnNameTo){
-        //         spawnDataTo = CID;
-        //         // TODO :
-        //         foundTo = true;
-        //     }
-        // }
+    }
+    private ChampInstanceData findInFightersByNameprivate(string spawnNameFrom){
 
-        // Check if found
-        // From and To : Switch the SpawnNames
-        // From and !To : Change the SpawnName
-        // !From : Switch the SpawnNames
+        foreach (ChampInstanceData CID in Substitutes)
+        {
+            if (CID.SpawnName == spawnNameFrom){
+                return CID;
+            }
+        }
+        return null;
+    }
+    private ChampInstanceData findInSubstitutesByNameprivate(string spawnNameFrom){
+
+        foreach (ChampInstanceData CID in Substitutes)
+        {
+            if (CID.SpawnName == spawnNameFrom){
+                return CID;
+            }
+        }
+        return null;
+    }
+
+    public bool findInFightersByName(string spawnNameFrom){
+
+        foreach (ChampInstanceData CID in Substitutes)
+        {
+            if (CID.SpawnName == spawnNameFrom){
+                return true;
+            }
+        }
+        return false;
+    }
+    public bool findInSubstitutesByName(string spawnNameFrom){
+
+        foreach (ChampInstanceData CID in Substitutes)
+        {
+            if (CID.SpawnName == spawnNameFrom){
+                return true;
+            }
+        }
+        return false;
+    }
+    public bool findBySpawnerName(string spawner){
+        return this.findInSubstitutesByName(spawner) && this.findInFightersByName(spawner);
     }
 
 }

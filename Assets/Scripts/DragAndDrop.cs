@@ -5,20 +5,19 @@ using UnityEngine;
 public class DragAndDrop : MonoBehaviour
 {
     public ChampionPrepController championPrepController;
-    public List<Vector3> SpawnPositions = new List<Vector3>();
     
     private TerrainCollider terrainCollider;
     private PlacementData playerPlacementData;
     private GameObject DraggedInstance;
-    private string nameSpawnFrom = "";
-    private string nameSpawnTo = "";
     private bool isDragging = false;
+    private GameObject fromSpawn;
+    private GameObject toSpawn;
+
     // Start is called before the first frame update
     void Start()
     {
         Debug.Log("start()");
         terrainCollider = Terrain.activeTerrain.GetComponent<TerrainCollider>();
-        getSpawningPoints();
         playerPlacementData = GameObject.FindWithTag("GameManager")
             .transform.GetComponent<GameManager>()
                 .GetPlayer().GetPlacementData();
@@ -30,31 +29,48 @@ public class DragAndDrop : MonoBehaviour
             Vector3 clickWorldCoord = getWorldCoordonatesFromClick(Input.mousePosition);
             if ( clickWorldCoord.x != -1 && clickWorldCoord.y != -1 && clickWorldCoord.z != -1 )
             {
-                this.isDragging = true;
-                this.nameSpawnFrom = checkNearestActiveSpawner(clickWorldCoord).name;
-                // TODO : PlacementData.getSpawnActiveInstance()
+                Debug.Log("button down but in bounds. " + clickWorldCoord);
+                fromSpawn = checkNearestActiveSpawner(clickWorldCoord);
+                if (fromSpawn != null)
+                {
+                    this.isDragging = true;
+                }
+                // TODO A : PlacementData.getSpawnActiveInstance()
                 // this.DraggedInstance = playerPlacementData.getSpawnActiveInstance();
             } //else we do nothing 
         } else if (Input.GetMouseButtonUp(0) && isDragging){
-            this.isDragging = false;
             Vector3 clickWorldCoord = getWorldCoordonatesFromClick(Input.mousePosition);
             if ( clickWorldCoord.x != -1 && clickWorldCoord.y != -1 && clickWorldCoord.z != -1 )
             {
-                this.nameSpawnTo = checkNearestActiveSpawner(clickWorldCoord).name;
-                playerPlacementData.switchChampionsInstances(nameSpawnFrom, nameSpawnTo);
+                toSpawn = checkNearestSpawner(clickWorldCoord);
+                if (toSpawn != null)
+                {
+                    Debug.Log("button up but in bounds. " + clickWorldCoord);
+                    Debug.Log(fromSpawn.name + " here 'from' position : " + fromSpawn.transform.position);
+                    Debug.Log(toSpawn.name + " here 'To' position : " + toSpawn.transform.position);
+                    championPrepController.switchChampionsInstances(fromSpawn, toSpawn);
+                } else {
+                    // TODO B2 : Bring character back to original position
+                }
             } else
+                // TODO B2 : Bring character back to original position
                 Debug.Log("button up but out of bounds. ");
-                // Button down out of bounds && Input.GetMouseButtonDown(0) && !isDragging
-                // TODO : Get character back to its original place
+            this.isDragging = false;
+            resetAfterSwitch();
+                
         } else if (isDragging){
             Vector3 clickWorldCoord = getWorldCoordonatesFromClick(Input.mousePosition);
             if ( clickWorldCoord.x != -1 && clickWorldCoord.y != -1 && clickWorldCoord.z != -1 )
             {
-                // TODO : Move character while dragging
+                // TODO B1 : Move character while dragging
                 // this.DraggedInstance.transform.position = clickWorldCoord;
                 //Debug.Log("move character");
             }
         }
+    }
+    private void resetAfterSwitch(){
+        this.fromSpawn = null;
+        this.toSpawn = null;
     }
     private Vector3 getWorldCoordonatesFromClick(Vector3 mousePosition){
         Ray ray;
@@ -66,7 +82,6 @@ public class DragAndDrop : MonoBehaviour
         }
         return new Vector3(-1, -1, -1);
     }
-    
 	GameObject checkNearestActiveSpawner(Vector3 clickPos)
 	{
     	float distanceToClosestSpawnPoint = 10f;
@@ -100,22 +115,32 @@ public class DragAndDrop : MonoBehaviour
         }
         return (closestSpawner == null ? null : closestSpawner.gameObject);
 	}
-    public void setController(ChampionPrepController ChampionPrepController){
-        this.championPrepController = ChampionPrepController;
-    }
-
-    private void getSpawningPoints(){
-        Transform Spawner;
-        Transform AllySpawnPositions = transform.Find("SpawnPositions");
-        foreach (Transform AllySP in AllySpawnPositions)
+    	GameObject checkNearestSpawner(Vector3 clickPos)
+	{
+    	float distanceToClosestSpawnPoint = 1000f;
+        Transform closestSpawner = null;
+        Transform allySpawnPositions = transform.Find("SpawnPositions");
+        foreach (Transform AllySP in allySpawnPositions)
         {
-            Spawner = null;
-            Spawner = AllySP.gameObject.transform;
-            if (Spawner != null){
-                SpawnPositions.Add(Spawner.position);
+            float distanceToclick = Vector3.Distance (AllySP.position, clickPos);
+            if (distanceToclick < distanceToClosestSpawnPoint) {
+                distanceToClosestSpawnPoint = distanceToclick;
+                closestSpawner = AllySP;
+            }
+
+        }
+        Transform allySubsSpawnPositions = transform.Find("SubsSpawnPositions");
+        foreach (Transform AllySSP in allySubsSpawnPositions)
+        {
+            float distanceToclick = Vector3.Distance (AllySSP.position, clickPos);
+            if (distanceToclick < distanceToClosestSpawnPoint) {
+                distanceToClosestSpawnPoint = distanceToclick;
+                closestSpawner = AllySSP;
             }
         }
-        // Debug.Log("SpawnPositions.forEach");
-        // SpawnPositions.ForEach((pos) => Debug.Log(pos));
+        return (closestSpawner == null ? null : closestSpawner.gameObject);
+	}
+    public void setController(ChampionPrepController ChampionPrepController){
+        this.championPrepController = ChampionPrepController;
     }
 }
