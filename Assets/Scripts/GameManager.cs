@@ -72,8 +72,8 @@ public class GameManager : MonoBehaviour
     }
     public void Battle()
     {
-        gameController = new GameController();
         SceneManager.LoadScene(2);
+        gameController = new GameController();
     }
     public void Play()
     {

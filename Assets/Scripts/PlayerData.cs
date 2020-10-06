@@ -70,10 +70,8 @@ public class PlayerData
         return this.placementData;
     }
     public bool canMoveBasedOnLevel(bool FromIsFighter, bool ToIsFighter, bool ToContainsChampion){
-        Debug.Log("ToIsFighter " + ToIsFighter);
         if (!ToIsFighter)
             return true;
-        Debug.Log("FromIsFighter " + FromIsFighter);
         if (FromIsFighter)
             return true;
 
@@ -82,7 +80,6 @@ public class PlayerData
         int FightersNb = this.GetPlacementData().getFightingChampsNumber();
         int level = this.GetLevel();
         if (FightersNb < level || ToContainsChampion){
-            Debug.Log(FightersNb+"<"+level);
             return true;
         }
         return false;

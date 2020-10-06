@@ -57,7 +57,6 @@ public class DragAndDrop : MonoBehaviour
                 }
             } else
                 this.DraggedInstance.transform.position = this.DraggedChampOriginalPosition;
-                
             resetAfterSwitch();
                 
         } 
