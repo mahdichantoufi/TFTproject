@@ -100,5 +100,9 @@ public class UpdateUI : MonoBehaviour
             refreshStore();
         }
     }
+    public void Quit()
+    {
+        GameObject.FindWithTag("GameManager").transform.GetComponent<GameManager>().Pause();
+    }
 
 }
