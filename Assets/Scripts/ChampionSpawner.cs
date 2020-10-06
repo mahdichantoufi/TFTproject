@@ -5,6 +5,7 @@ using UnityEngine;
 public class ChampionSpawner : MonoBehaviour
 {
     public bool championIsActive;
+    public bool FightingSpawner;
     
     private bool championPopped = false;
     private bool containsChampion = false;

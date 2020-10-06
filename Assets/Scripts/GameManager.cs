@@ -24,10 +24,6 @@ public class GameManager : MonoBehaviour
         //Sets this to not be destroyed when reloading scene / Switching scenes
         DontDestroyOnLoad(gameObject);
     }
-    void Start()
-    {
-        
-    }
 
     public PlayerData GetPlayer(){
         return this.playerData;

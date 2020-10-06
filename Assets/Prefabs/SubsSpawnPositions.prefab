@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a983c0cfa87804041bb8a286dba6ebfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  championIsActive: 0
+  FightingSpawner: 0
 --- !u!1 &1842189787115924057
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,6 +90,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a983c0cfa87804041bb8a286dba6ebfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  championIsActive: 0
+  FightingSpawner: 0
 --- !u!1 &1929189388581730559
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,6 +136,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a983c0cfa87804041bb8a286dba6ebfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  championIsActive: 0
+  FightingSpawner: 0
 --- !u!1 &2545343394415357676
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,6 +182,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a983c0cfa87804041bb8a286dba6ebfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  championIsActive: 0
+  FightingSpawner: 0
 --- !u!1 &4007477338041122518
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,6 +228,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a983c0cfa87804041bb8a286dba6ebfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  championIsActive: 0
+  FightingSpawner: 0
 --- !u!1 &4661547976619638625
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,6 +274,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a983c0cfa87804041bb8a286dba6ebfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  championIsActive: 0
+  FightingSpawner: 0
 --- !u!1 &7003527603523445119
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,6 +320,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a983c0cfa87804041bb8a286dba6ebfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  championIsActive: 0
+  FightingSpawner: 0
 --- !u!1 &7052070586292762577
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,6 +366,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a983c0cfa87804041bb8a286dba6ebfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  championIsActive: 0
+  FightingSpawner: 0
 --- !u!1 &7725194296379829170
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,6 +452,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a983c0cfa87804041bb8a286dba6ebfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  championIsActive: 0
+  FightingSpawner: 0
 --- !u!1 &9105269692352036368
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,6 +498,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a983c0cfa87804041bb8a286dba6ebfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  championIsActive: 0
+  FightingSpawner: 0
 --- !u!1001 &1199418528672796231
 PrefabInstance:
   m_ObjectHideFlags: 0

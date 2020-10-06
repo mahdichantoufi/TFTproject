@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   championIsActive: 1
+  FightingSpawner: 1
 --- !u!1 &1542779478626383119
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,6 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   championIsActive: 1
+  FightingSpawner: 1
 --- !u!1 &2270261021202164076
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,6 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   championIsActive: 1
+  FightingSpawner: 1
 --- !u!1 &4534367968695738844
 GameObject:
   m_ObjectHideFlags: 0
@@ -219,6 +222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   championIsActive: 1
+  FightingSpawner: 1
 --- !u!1 &5314531111580213355
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,6 +268,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   championIsActive: 1
+  FightingSpawner: 1
 --- !u!1 &6705449588559310929
 GameObject:
   m_ObjectHideFlags: 0
@@ -309,6 +314,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   championIsActive: 1
+  FightingSpawner: 1
 --- !u!1 &7249019742273644098
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,6 +360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   championIsActive: 1
+  FightingSpawner: 1
 --- !u!1 &7479545851018999012
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,6 +406,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   championIsActive: 1
+  FightingSpawner: 1
 --- !u!1 &8168609015429355347
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,6 +452,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   championIsActive: 1
+  FightingSpawner: 1
 --- !u!1001 &1070669363447970352
 PrefabInstance:
   m_ObjectHideFlags: 0

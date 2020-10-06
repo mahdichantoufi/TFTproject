@@ -15,7 +15,7 @@ public class PlayerData
     private int NumberOfSubsSpawns = 10;
     public PlayerData (string username){
         this.username = username;
-        this.earnedGold = 50;
+        this.earnedGold = 5000;
         this.experiencePoints = 0;
         this.level = 1;
         this.health = 100;
@@ -68,5 +68,23 @@ public class PlayerData
     }
     public PlacementData GetPlacementData(){
         return this.placementData;
+    }
+    public bool canMoveBasedOnLevel(bool FromIsFighter, bool ToIsFighter, bool ToContainsChampion){
+        Debug.Log("ToIsFighter " + ToIsFighter);
+        if (!ToIsFighter)
+            return true;
+        Debug.Log("FromIsFighter " + FromIsFighter);
+        if (FromIsFighter)
+            return true;
+
+        // Case : From Sub to Fighter
+        
+        int FightersNb = this.GetPlacementData().getFightingChampsNumber();
+        int level = this.GetLevel();
+        if (FightersNb < level || ToContainsChampion){
+            Debug.Log(FightersNb+"<"+level);
+            return true;
+        }
+        return false;
     }
 }

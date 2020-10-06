@@ -44,27 +44,38 @@ public class ChampionPrepController : GameController
         }
         return null;
     }
-    public void switchChampionsInstances(GameObject From, GameObject To){
+    public bool switchChampionsInstances(GameObject From, GameObject To){
         bool foundFrom = false;
         bool foundTo = false;
+        ChampionSpawner FromScript = From.GetComponent<ChampionSpawner>();
+        ChampionSpawner ToScript = To.GetComponent<ChampionSpawner>();
+        Debug.Log("can Move ? " + playerData.canMoveBasedOnLevel(FromScript.FightingSpawner, ToScript.FightingSpawner, ToScript.spawnPointIsActive()));
 
         foundFrom = playerData.GetPlacementData().findBySpawnerName(From.name);
         if(foundFrom){
+            // SpawnFrom contient un champion
+            if (!playerData.canMoveBasedOnLevel(FromScript.FightingSpawner, ToScript.FightingSpawner, ToScript.spawnPointIsActive()))
+                return false;
+                // Le player a placé autant de champions sur le terrain qu'autorisés par son level
+
             foundTo = playerData.GetPlacementData().findBySpawnerName(To.name);
-            // Check if found
-            // From and To : Switch the SpawnNames
-            // From and !To : Change the SpawnName
-            // !From : Error
-            if (foundFrom && !foundTo) {
-                From.GetComponent<ChampionSpawner>().desactivateSpawnPoint();
-                To.GetComponent<ChampionSpawner>().activateSpawnPoint();
-                playerData.GetPlacementData().setSpawner(From.name, To.name, To.transform.position);
-            } else if (foundFrom && foundTo) {
-                playerData.GetPlacementData().setSpawner(From.name, To.name, To.transform.position);
-                playerData.GetPlacementData().setSpawner(To.name, From.name, From.transform.position);
+            if (!foundTo) {
+                // SpawnFrom contient un champion mais pas SpawnTo
+                FromScript.desactivateSpawnPoint();
+                ToScript.activateSpawnPoint();
+                playerData.GetPlacementData().setSpawner(From.name, To.name, To.transform.position, ToScript.FightingSpawner);
             }
+            else {
+                // SpawnFrom Et SpawnTo contiennent un champion
+                // Check if found
+                // From and To : Switch the SpawnNames
+                // From and !To : Change the SpawnName
+                // !From : Error
+                playerData.GetPlacementData().switchSpawners(From, To);
+            }
+            return true;
         }
-        
+        return false;
     }
     public void UpExperience()
     {

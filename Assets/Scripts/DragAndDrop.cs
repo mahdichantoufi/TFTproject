@@ -9,6 +9,7 @@ public class DragAndDrop : MonoBehaviour
     private TerrainCollider terrainCollider;
     private PlacementData playerPlacementData;
     private GameObject DraggedInstance;
+    private Vector3 DraggedChampOriginalPosition;
     private bool isDragging = false;
     private GameObject fromSpawn;
     private GameObject toSpawn;
@@ -29,48 +30,48 @@ public class DragAndDrop : MonoBehaviour
             Vector3 clickWorldCoord = getWorldCoordonatesFromClick(Input.mousePosition);
             if ( clickWorldCoord.x != -1 && clickWorldCoord.y != -1 && clickWorldCoord.z != -1 )
             {
-                Debug.Log("button down but in bounds. " + clickWorldCoord);
                 fromSpawn = checkNearestActiveSpawner(clickWorldCoord);
                 if (fromSpawn != null)
                 {
                     this.isDragging = true;
                 }
-                // TODO A : PlacementData.getSpawnActiveInstance()
-                // this.DraggedInstance = playerPlacementData.getSpawnActiveInstance();
+                this.DraggedInstance = playerPlacementData.getSpawnActiveInstance(fromSpawn.name);
+                this.DraggedChampOriginalPosition = this.DraggedInstance.transform.position;
             } //else we do nothing 
-        } else if (Input.GetMouseButtonUp(0) && isDragging){
+        } 
+        else if (Input.GetMouseButtonUp(0) && isDragging){
+            this.isDragging = false;
             Vector3 clickWorldCoord = getWorldCoordonatesFromClick(Input.mousePosition);
             if ( clickWorldCoord.x != -1 && clickWorldCoord.y != -1 && clickWorldCoord.z != -1 )
             {
                 toSpawn = checkNearestSpawner(clickWorldCoord);
                 if (toSpawn != null)
                 {
-                    Debug.Log("button up but in bounds. " + clickWorldCoord);
-                    Debug.Log(fromSpawn.name + " here 'from' position : " + fromSpawn.transform.position);
-                    Debug.Log(toSpawn.name + " here 'To' position : " + toSpawn.transform.position);
-                    championPrepController.switchChampionsInstances(fromSpawn, toSpawn);
+                    if (!championPrepController.switchChampionsInstances(fromSpawn, toSpawn)){
+                        this.DraggedInstance.transform.position = this.DraggedChampOriginalPosition;
+                    }
                 } else {
-                    // TODO B2 : Bring character back to original position
+                    this.DraggedInstance.transform.position = this.DraggedChampOriginalPosition;
                 }
             } else
-                // TODO B2 : Bring character back to original position
-                Debug.Log("button up but out of bounds. ");
-            this.isDragging = false;
+                this.DraggedInstance.transform.position = this.DraggedChampOriginalPosition;
+                
             resetAfterSwitch();
                 
-        } else if (isDragging){
+        } 
+        else if (isDragging){
             Vector3 clickWorldCoord = getWorldCoordonatesFromClick(Input.mousePosition);
             if ( clickWorldCoord.x != -1 && clickWorldCoord.y != -1 && clickWorldCoord.z != -1 )
             {
                 // TODO B1 : Move character while dragging
-                // this.DraggedInstance.transform.position = clickWorldCoord;
-                //Debug.Log("move character");
+                this.DraggedInstance.transform.position = clickWorldCoord;
             }
         }
     }
     private void resetAfterSwitch(){
         this.fromSpawn = null;
         this.toSpawn = null;
+        this.DraggedChampOriginalPosition = new Vector3(-1, -1, -1);
     }
     private Vector3 getWorldCoordonatesFromClick(Vector3 mousePosition){
         Ray ray;
@@ -82,7 +83,7 @@ public class DragAndDrop : MonoBehaviour
         }
         return new Vector3(-1, -1, -1);
     }
-	GameObject checkNearestActiveSpawner(Vector3 clickPos)
+	private GameObject checkNearestActiveSpawner(Vector3 clickPos)
 	{
     	float distanceToClosestSpawnPoint = 10f;
         Transform closestSpawner = null;
@@ -115,7 +116,7 @@ public class DragAndDrop : MonoBehaviour
         }
         return (closestSpawner == null ? null : closestSpawner.gameObject);
 	}
-    	GameObject checkNearestSpawner(Vector3 clickPos)
+    private GameObject checkNearestSpawner(Vector3 clickPos)
 	{
     	float distanceToClosestSpawnPoint = 1000f;
         Transform closestSpawner = null;
