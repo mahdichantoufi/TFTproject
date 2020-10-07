@@ -16,10 +16,10 @@ public class ChampionSpawner : MonoBehaviour
     }
     public GameObject spawnChampion(GameObject ChampionPrefab)
     {
-        if(!championPopped && containsChampion){
-            GameObject championInstance = Instantiate(ChampionPrefab, SpawnPosition, Quaternion.identity);//,Champs);
+        if(!championPopped && !containsChampion){
+            activateSpawnPoint();
+            GameObject championInstance = Instantiate(ChampionPrefab, SpawnPosition, Quaternion.identity);
             containsChampion = true;
-            championPopped = true;
             if(championIsActive){
                 championInstance.gameObject.GetComponent<Champion>().setActive();
             }
@@ -32,7 +32,6 @@ public class ChampionSpawner : MonoBehaviour
         containsChampion = true;
     }
     public void desactivateSpawnPoint(){
-        championPopped = false;
         containsChampion = false;
     }
     public bool spawnPointIsActive(){

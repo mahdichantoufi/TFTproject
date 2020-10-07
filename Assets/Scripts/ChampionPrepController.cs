@@ -10,7 +10,6 @@ public class ChampionPrepController
 {
     protected PlayerData playerData;
     protected Transform transform;
-    // TODO : GET CHAMPS FROM GLABAL WITH
     public ChampionPrepController()
     {
         transform = GameManager.instance.transform;
@@ -22,7 +21,6 @@ public class ChampionPrepController
 
         ChampionSpawner SubSpawner = getFirstAvailableSubsituteSpawnPoint();
         if (SubSpawner != null){
-            SubSpawner.activateSpawnPoint();
             GameObject instanceP = SubSpawner.spawnChampion(GameManager.instance.GetChampions()[prefabIndex]);
             playerData.GetPlacementData().addChampionInstance(
                 SubSpawner.gameObject.name, 

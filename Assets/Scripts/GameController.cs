@@ -17,7 +17,6 @@ public class GameController
 
     public GameController()
     {
-        // TODO : getPlayerChampionsDetails();
         // TODO : getEnemyChampionsDetails();
         transform = GameManager.instance.transform;
         playerData = GameManager.instance.GetPlayer();
@@ -31,7 +30,8 @@ public class GameController
 
     public void SpawnFightingChampions(){
         ChampionSpawner Spawner;
-        Transform AllySpawnPositions = transform.Find("SpawnPositions");
+        Transform AllySpawnPositions = transform.Find("FightSpawnPositions");
+        //playerData.GetPlacementData().printME();
         Debug.Log("allies index :");
         foreach (Transform AllySP in AllySpawnPositions)
         {
@@ -43,7 +43,7 @@ public class GameController
             UnityEngine.Debug.Log(AllySP);
             if (Spawner != null && index != -1){
                 Debug.Log("+"+index);
-                Spawner.spawnChampion(GameManager.instance.GetChampions()[index]);
+                Spawner.spawnChampion(GameManager.instance.GetChampions()[index+1]);
             }
         }
     }
