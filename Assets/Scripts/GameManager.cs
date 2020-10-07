@@ -76,6 +76,13 @@ public class GameManager : MonoBehaviour
         //SceneManager.LoadScene(2);
         gameController.init();
     }
+    public void EndOfBattle()
+    {
+        gameController = null;
+        championPrepController = new ChampionPrepController();
+        SceneManager.LoadScene(1);
+
+    }
     public void Play()
     {
         this.playerData = new PlayerData(username);

@@ -147,6 +147,7 @@ public class Champion : MonoBehaviour
     void die(){
         isAlive = false;
         currentHealth = 0;
+        GameManager.instance.EndOfBattle();
         Destroy(this.gameObject);
     }
     public bool isDead(){
