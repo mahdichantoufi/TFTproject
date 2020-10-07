@@ -35,7 +35,7 @@ public class DragAndDrop : MonoBehaviour
                 if (fromSpawn != null)
                 {
                     this.isDragging = true;
-                    this.DraggedInstance = playerPlacementData.getSpawnActiveInstance(fromSpawn.name);
+                    this.DraggedInstance = playerPlacementData.GetSpawnActiveInstance(fromSpawn.name);
                     this.DraggedChampOriginalPosition = this.DraggedInstance.transform.position;
                 }
             } //else we do nothing 

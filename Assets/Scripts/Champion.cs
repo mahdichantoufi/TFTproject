@@ -144,10 +144,16 @@ public class Champion : MonoBehaviour
         // Debug.Log("Taken damage = " + takenDamage.ToString());
         // Debug.Log("Current health = " + currentHealth.ToString());
     }
+    void pop(){
+        isActive = false;
+        isAlive = true;
+        currentHealth = health;
+        this.gameObject.SetActive(true);
+    }
     void die(){
         isAlive = false;
         currentHealth = 0;
-        Destroy(this.gameObject);
+        this.gameObject.SetActive(true);
     }
     public bool isDead(){
         if (isAlive) return false;

@@ -24,26 +24,19 @@ public class GameController
     }
     public void init()
     {
-        SpawnFightingChampions();
+        ActivateFightingChampions();
+        // TODO : Activate Enemies
         SpawnEnemyChampions();
     }
 
-    public void SpawnFightingChampions(){
-        ChampionSpawner Spawner;
-        Transform AllySpawnPositions = transform.Find("FightSpawnPositions");
+    public void ActivateFightingChampions(){
+        Transform AllySpawnPositions = transform.Find("SpawnPositions");
         //playerData.GetPlacementData().printME();
-        Debug.Log("allies index :");
         foreach (Transform AllySP in AllySpawnPositions)
         {
-            Spawner = null;
-            Spawner = AllySP.gameObject.GetComponent<ChampionSpawner>();
-            int index = playerData.GetPlacementData().GetChampionPrefabIndex(AllySP.gameObject.name);
-            UnityEngine.Debug.Log(index);
-            UnityEngine.Debug.Log(Spawner);
-            UnityEngine.Debug.Log(AllySP);
-            if (Spawner != null && index != -1){
-                Debug.Log("+"+index);
-                Spawner.spawnChampion(GameManager.instance.GetChampions()[index+1]);
+            GameObject InstanceChampion = playerData.GetPlacementData().GetSpawnActiveInstance(AllySP.gameObject.name);
+            if (InstanceChampion != null){
+                InstanceChampion.GetComponent<Champion>().setActive();
             }
         }
     }
@@ -57,7 +50,6 @@ public class GameController
             Spawner = null;
             Spawner = EnemySP.gameObject.GetComponent<ChampionSpawner>();
             if (Spawner != null){
-                Spawner.activateSpawnPoint();
                 Spawner.spawnChampion(GameManager.instance.GetEnemyChampions()[1]);
                 i++;
             }

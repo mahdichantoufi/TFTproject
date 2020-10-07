@@ -27,7 +27,7 @@ public class ChampionSpawner : MonoBehaviour
         }
         return null;
     }
-    
+     
     public void activateSpawnPoint(){
         containsChampion = true;
     }
