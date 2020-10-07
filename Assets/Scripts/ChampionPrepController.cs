@@ -16,6 +16,46 @@ public class ChampionPrepController
         playerData = GameManager.instance.GetPlayer();
     }
 
+    // TODO : SpawnEnemyChampions()
+    // TODO : SpawnEnemyChampions()
+    // public void SpawnEnemyChampions(){
+    //     ChampionSpawner Spawner;
+    //     Transform EnemySpawnPositions = transform.Find("EnemySpawnPositions");
+    //     int i = 0;
+    //     Debug.Log("Spawning enemies...");
+    //     foreach (Transform EnemySP in EnemySpawnPositions)
+    //     {
+    //         Spawner = null;
+    //         Spawner = EnemySP.gameObject.GetComponent<ChampionSpawner>();
+    //         if (Spawner != null){
+    //             Spawner.spawnChampion(GameManager.instance.GetEnemyChampions()[1]);
+    //             i++;
+    //         }
+    //     }
+    //     Debug.Log("Done... EnemiesNb: "+i);
+    // }
+
+    // TODO : SpawnFightingChampions
+    // public void SpawnFightingChampions(){
+    //     ChampionSpawner Spawner;
+    //     Transform AllySpawnPositions = transform.Find("FightSpawnPositions");
+    //     //playerData.GetPlacementData().printME();
+    //     Debug.Log("allies index :");
+    //     foreach (Transform AllySP in AllySpawnPositions)
+    //     {
+    //         Spawner = null;
+    //         Spawner = AllySP.gameObject.GetComponent<ChampionSpawner>();
+    //         int index = playerData.GetPlacementData().GetChampionPrefabIndex(AllySP.gameObject.name);
+    //         UnityEngine.Debug.Log(index);
+    //         UnityEngine.Debug.Log(Spawner);
+    //         UnityEngine.Debug.Log(AllySP);
+    //         if (Spawner != null && index != -1){
+    //             Debug.Log("+"+index);
+    //             Spawner.spawnChampion(GameManager.instance.GetChampions()[index+1]);
+    //         }
+    //     }
+    // }
+
 
     public void addPurchasedChampion(int prefabIndex){
 

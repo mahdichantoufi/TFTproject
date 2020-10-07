@@ -42,7 +42,7 @@ public class PlacementData
     public bool isThereAnyFreeSpawnPoints(){
         return !(actualSubstitutesNb == maximumSubstitutesNb);
     }
-    public GameObject getSpawnActiveInstance(string spawnNameFrom){
+    public GameObject GetSpawnActiveInstance(string spawnNameFrom){
         if(findInFightersByName(spawnNameFrom)){
             return findInFightersByNameprivate(spawnNameFrom).ChampionInstance;
         }
