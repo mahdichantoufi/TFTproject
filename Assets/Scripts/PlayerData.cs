@@ -12,6 +12,7 @@ public class PlayerData
     public bool uptodate;
     private PlacementData placementData;
     private int NumberOfFightingSpawns = 9;
+    private int NumberOfEnemySpawns = 9;
     private int NumberOfSubsSpawns = 10;
     public PlayerData (string username){
         this.username = username;
@@ -20,7 +21,7 @@ public class PlayerData
         this.level = 1;
         this.health = 100;
         this.uptodate = false;
-        this.placementData = new PlacementData(NumberOfFightingSpawns,NumberOfSubsSpawns);
+        this.placementData = new PlacementData(NumberOfFightingSpawns, NumberOfSubsSpawns, NumberOfEnemySpawns);
     }
     public void AddGold(int gold){
         earnedGold = earnedGold + gold;

@@ -26,7 +26,7 @@ public class GameController
     {
         ActivateFightingChampions();
         // TODO : Activate Enemies
-        SpawnEnemyChampions();
+        //SpawnEnemyChampions();
     }
 
     public void ActivateFightingChampions(){
@@ -39,7 +39,28 @@ public class GameController
                 InstanceChampion.GetComponent<Champion>().setActive();
             }
         }
+        Transform EnemySpawnPositions = transform.Find("EnemySpawnPositions");
+        //playerData.GetPlacementData().printME();
+        foreach (Transform EnemySP in EnemySpawnPositions)
+        {
+            GameObject InstanceChampion = playerData.GetPlacementData().GetSpawnActiveInstance(EnemySP.gameObject.name);
+            if (InstanceChampion != null)
+            {
+                InstanceChampion.GetComponent<Champion>().setActive();
+            }
+        }
     }
+   /* public void ActivateFightingChampions(){
+        Transform AllySpawnPositions = transform.Find("SpawnPositions");
+        //playerData.GetPlacementData().printME();
+        foreach (Transform AllySP in AllySpawnPositions)
+        {
+            GameObject InstanceChampion = playerData.GetPlacementData().GetSpawnActiveInstance(AllySP.gameObject.name);
+            if (InstanceChampion != null){
+                InstanceChampion.GetComponent<Champion>().setActive();
+            }
+        }
+    }*/
     public void SpawnEnemyChampions(){
         ChampionSpawner Spawner;
         Transform EnemySpawnPositions = transform.Find("EnemySpawnPositions");
@@ -50,7 +71,7 @@ public class GameController
             Spawner = null;
             Spawner = EnemySP.gameObject.GetComponent<ChampionSpawner>();
             if (Spawner != null){
-                Spawner.spawnChampion(GameManager.instance.GetEnemyChampions()[1]);
+                Spawner.spawnChampion(GameManager.instance.GetEnemyChampion(1));
                 i++;
             }
         }

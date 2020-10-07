@@ -1371,6 +1371,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
+  championName: eqd
+  price: 0
   attackDamage: 10
   health: 100
   shield: 0

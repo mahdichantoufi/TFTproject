@@ -1896,6 +1896,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
+  championName: dfg
+  price: 0
   attackDamage: 20
   health: 100
   shield: 0

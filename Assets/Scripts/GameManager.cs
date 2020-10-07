@@ -86,8 +86,8 @@ public class GameManager : MonoBehaviour
     public void Play()
     {
         this.playerData = new PlayerData(username);
+        SceneManager.LoadSceneAsync(1);
         championPrepController = new ChampionPrepController();
-        SceneManager.LoadScene(1);
     }
 
     public void BackToMenu()
@@ -114,9 +114,9 @@ public class GameManager : MonoBehaviour
     {
         return this.Champions;
     }
-    public GameObject[] GetEnemyChampions()
+    public GameObject GetEnemyChampion(int i)
     {
-        return this.EnemyChampions;
+        return this.EnemyChampions[i];
     }
 
 

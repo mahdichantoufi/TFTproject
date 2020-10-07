@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlacementData
 {
+    private int maximumEnemyNb;
     private int maximumFighterNb;
     private int actualFighterNb;
     private int maximumSubstitutesNb;
@@ -27,9 +28,10 @@ public class PlacementData
     }
     private List<ChampInstanceData> Fighters;
     private List<ChampInstanceData> Substitutes;
+    private List<ChampInstanceData> Enemies;
 
 
-    public PlacementData(int NumberOfFightingSpawns, int NumberOfSubsSpawns)
+    public PlacementData(int NumberOfFightingSpawns, int NumberOfSubsSpawns, int NumberOfEnemySpawns)
     {
         Fighters = new List<ChampInstanceData>();
         maximumFighterNb = NumberOfFightingSpawns;
@@ -38,6 +40,9 @@ public class PlacementData
         Substitutes = new List<ChampInstanceData>();
         maximumSubstitutesNb = NumberOfSubsSpawns;
         actualSubstitutesNb = 0;
+
+        Enemies = new List<ChampInstanceData>();
+        maximumEnemyNb = NumberOfEnemySpawns;
     }
     public bool isThereAnyFreeSpawnPoints(){
         return !(actualSubstitutesNb == maximumSubstitutesNb);
@@ -48,6 +53,9 @@ public class PlacementData
         }
         else if(findInSubstitutesByName(spawnNameFrom)){
             return findInSubstitutesByNameprivate(spawnNameFrom).ChampionInstance;
+        }
+        else if(findInEnemiesByName(spawnNameFrom)){
+            return findInEnemiesByNameprivate(spawnNameFrom).ChampionInstance;
         }
         return null;
     }
@@ -73,6 +81,18 @@ public class PlacementData
                 Substitutes.Add(newChampInstance);
                 actualSubstitutesNb += 1;
             }
+        }
+    }
+    //TODO : drag and drop disable for enemies
+    public void addEnemyChampionInstance(
+        string spawnName, 
+        GameObject championInstance, 
+        int prefabIndex)
+    {
+        UnityEngine.Debug.Log(spawnName + championInstance + prefabIndex);
+        ChampInstanceData newChampInstance= new ChampInstanceData(spawnName, championInstance, prefabIndex);
+        if (newChampInstance != null) {
+            Enemies.Add(newChampInstance);
         }
     }
     public void setSpawner(string spawnNameFrom, string spawnNameTo, Vector3 spawnerPositionTo, bool ToIsFighterSpawn){
@@ -174,7 +194,6 @@ public class PlacementData
         else if(findInSubstitutesByName(spawnNameToDelete)){
             Substitutes.Remove(findInSubstitutesByNameprivate(spawnNameToDelete));
         }
-
     }
 
     private ChampInstanceData findInFightersByNameprivate(string spawnNameFrom){
@@ -198,6 +217,19 @@ public class PlacementData
         return null;
     }
 
+    private ChampInstanceData findInEnemiesByNameprivate(string spawnNameFrom)
+    {
+
+        foreach (ChampInstanceData CID in Enemies)
+        {
+            if (CID.SpawnName == spawnNameFrom)
+            {
+                return CID;
+            }
+        }
+        return null;
+    }
+
     public bool findInFightersByName(string spawnNameFrom){
 
         foreach (ChampInstanceData CID in Fighters)
@@ -213,6 +245,19 @@ public class PlacementData
         foreach (ChampInstanceData CID in Substitutes)
         {
             if (CID.SpawnName == spawnNameFrom){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public bool findInEnemiesByName(string spawnNameFrom)
+    {
+
+        foreach (ChampInstanceData CID in Enemies)
+        {
+            if (CID.SpawnName == spawnNameFrom)
+            {
                 return true;
             }
         }

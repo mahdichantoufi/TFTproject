@@ -46,6 +46,11 @@ PrefabInstance:
       propertyPath: attackCooldown
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3452032465858534314, guid: 9aaa497526dcb4503aeb136b95d4d4ab,
+        type: 3}
+      propertyPath: championName
+      value: ezfze
+      objectReference: {fileID: 0}
     - target: {fileID: 3828218078894257293, guid: 9aaa497526dcb4503aeb136b95d4d4ab,
         type: 3}
       propertyPath: m_Name

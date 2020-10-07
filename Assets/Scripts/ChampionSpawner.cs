@@ -19,10 +19,12 @@ public class ChampionSpawner : MonoBehaviour
         if(!championPopped && !containsChampion){
             activateSpawnPoint();
             GameObject championInstance = Instantiate(ChampionPrefab, SpawnPosition, Quaternion.identity);
+            championInstance.gameObject.SetActive(true);
             containsChampion = true;
             if(championIsActive){
                 championInstance.gameObject.GetComponent<Champion>().setActive();
             }
+            
             return championInstance;
         }
         return null;

@@ -31,6 +31,7 @@ public class UpdateUI : MonoBehaviour
         championsIndex = new int[4];
         playerData = GameManager.instance.GetPlayer();
         username.text = playerData.GetUsername();
+        gameController.SpawnEnemyChampions();
         refreshStore();
     }
 

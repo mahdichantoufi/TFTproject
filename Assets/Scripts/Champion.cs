@@ -151,6 +151,7 @@ public class Champion : MonoBehaviour
         this.gameObject.SetActive(true);
     }
     void die(){
+        isActive = false;
         isAlive = false;
         currentHealth = 0;
         GameManager.instance.EndOfBattle();

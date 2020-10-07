@@ -1381,7 +1381,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
-  gameController: {fileID: 0}
+  championName: azde
+  price: 0
   attackDamage: 30
   health: 120
   shield: 0
