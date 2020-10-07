@@ -57,7 +57,6 @@ public class PlacementData
             return findInFightersByNameprivate(spawnName).getChampIndex();
         }
         return -1;
-        
     }
     public void addChampionInstance(
         string spawnName, 

@@ -63,7 +63,6 @@ public class DragAndDrop : MonoBehaviour
             Vector3 clickWorldCoord = getWorldCoordonatesFromClick(Input.mousePosition);
             if ( clickWorldCoord.x != -1 && clickWorldCoord.y != -1 && clickWorldCoord.z != -1 )
             {
-                // TODO B1 : Move character while dragging
                 this.DraggedInstance.transform.position = clickWorldCoord;
             }
         }

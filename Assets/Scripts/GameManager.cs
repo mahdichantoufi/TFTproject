@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
     }
     public void Battle()
     {
-        SceneManager.LoadScene(2, LoadSceneMode.Single);
+        SceneManager.LoadScene(2);
         gameController = new GameController();
     }
     public void Play()
