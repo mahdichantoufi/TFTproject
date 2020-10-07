@@ -47,11 +47,7 @@ public class ChampionPrepController
         bool foundTo = false;
         ChampionSpawner FromScript = From.GetComponent<ChampionSpawner>();
         ChampionSpawner ToScript = To.GetComponent<ChampionSpawner>();
-
-        Debug.Log("From is fighter ? " + FromScript.FightingSpawner);
-        Debug.Log("To is fighter ? " + ToScript.FightingSpawner);
-        Debug.Log("can Move ? " + playerData.canMoveBasedOnLevel(FromScript.FightingSpawner, ToScript.FightingSpawner, ToScript.spawnPointIsActive()));
-
+        
         foundFrom = playerData.GetPlacementData().findBySpawnerName(From.name);
         if(foundFrom){
             // SpawnFrom contient un champion
@@ -61,7 +57,6 @@ public class ChampionPrepController
 
             foundTo = playerData.GetPlacementData().findBySpawnerName(To.name);
             if (!foundTo) {
-                Debug.Log("SpawnFrom Et SpawnTo contiennent un champion");
                 // SpawnFrom contient un champion mais pas SpawnTo
                 FromScript.desactivateSpawnPoint();
                 ToScript.activateSpawnPoint();
@@ -74,14 +69,13 @@ public class ChampionPrepController
                 // From and !To : Change the SpawnName
                 // !From : Error
                 if (From.name == To.name){
-                    Debug.Log("SpawnFrom Et SpawnTo sont identiques");
                     return false;
                 }
                 playerData.GetPlacementData().switchSpawners(From, To);
             }
             return true;
         } else 
-            Debug.Log("SpawnFrom ne contient pas un champion");
+            Debug.Log("SpawnFrom ne contient pas de champion");
         return false;
     }
     public void SpawnSubstituteChampions(){

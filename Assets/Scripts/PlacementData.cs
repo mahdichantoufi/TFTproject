@@ -18,6 +18,9 @@ public class PlacementData
             this.ChampionInstance = championInstance;
             this.PrefabIndex = prefabIndex;
         }
+        public int getChampIndex(){
+            return this.PrefabIndex;
+        }
         public void printPref(){
             Debug.Log("Spawner :"+this.SpawnName+" => "+this.PrefabIndex);
         }
@@ -48,6 +51,14 @@ public class PlacementData
         }
         return null;
     }
+
+    public int GetChampionPrefabIndex(string spawnName){
+        if(findInFightersByName(spawnName)){
+            return findInFightersByNameprivate(spawnName).getChampIndex();
+        }
+        return -1;
+        
+    }
     public void addChampionInstance(
         string spawnName, 
         GameObject championInstance, 
@@ -67,13 +78,11 @@ public class PlacementData
     }
     public void setSpawner(string spawnNameFrom, string spawnNameTo, Vector3 spawnerPositionTo, bool ToIsFighterSpawn){
         if(ToIsFighterSpawn && findInFightersByName(spawnNameFrom)){ // From fighter spawn to fighter spawn
-            Debug.Log("1");
             ChampInstanceData champData = findInFightersByNameprivate(spawnNameFrom);
             champData.SpawnName = spawnNameTo;
             champData.ChampionInstance.transform.position = spawnerPositionTo;
         }
         else if(!ToIsFighterSpawn && findInFightersByName(spawnNameFrom)){ // From Fighter to Sub
-            Debug.Log("2");
             ChampInstanceData champData = findInFightersByNameprivate(spawnNameFrom);
             Fighters.Remove(champData);
             champData.SpawnName = spawnNameTo;
@@ -84,7 +93,6 @@ public class PlacementData
             actualSubstitutesNb += 1;
         }
         else if(ToIsFighterSpawn && findInSubstitutesByName(spawnNameFrom)){// From Sub to Fighter
-            Debug.Log("3");
             ChampInstanceData champData = findInSubstitutesByNameprivate(spawnNameFrom);
             Substitutes.Remove(champData);
             champData.SpawnName = spawnNameTo;
@@ -94,7 +102,6 @@ public class PlacementData
             actualSubstitutesNb -= 1;
         }
         else if(findInSubstitutesByName(spawnNameFrom)){// From Sub to sub
-            Debug.Log("4");
             ChampInstanceData champData = findInSubstitutesByNameprivate(spawnNameFrom);
             champData.SpawnName = spawnNameTo;
             champData.ChampionInstance.transform.position = spawnerPositionTo;
@@ -107,7 +114,6 @@ public class PlacementData
 
         if(FromIsFighterSpawn && ToIsFighterSpawn){ 
             // both fighter spawns
-            Debug.Log("1a");
             ChampInstanceData champDataFrom = findInFightersByNameprivate(spawnerFrom.name);
             ChampInstanceData champDataTo = findInFightersByNameprivate(spawnerTo.name);
             champDataFrom.SpawnName = spawnerTo.name;
@@ -118,7 +124,6 @@ public class PlacementData
 
         else if(!FromIsFighterSpawn && !ToIsFighterSpawn){ 
             // both Sub spawns
-            Debug.Log("1a");
             ChampInstanceData champDataFrom = findInSubstitutesByNameprivate(spawnerFrom.name);
             ChampInstanceData champDataTo = findInSubstitutesByNameprivate(spawnerTo.name);
             champDataFrom.SpawnName = spawnerTo.name;
@@ -129,7 +134,6 @@ public class PlacementData
 
         else if(FromIsFighterSpawn && !ToIsFighterSpawn){ 
             // From Fighter to Sub
-            Debug.Log("2a");
             ChampInstanceData champDataFrom = findInFightersByNameprivate(spawnerFrom.name);
             Fighters.Remove(champDataFrom);
             champDataFrom.SpawnName = spawnerTo.name;
@@ -146,7 +150,6 @@ public class PlacementData
 
         else {
             // From Sub to Fighter
-            Debug.Log("3a");
             ChampInstanceData champDataFrom = findInSubstitutesByNameprivate(spawnerFrom.name);
             Substitutes.Remove(champDataFrom);
             champDataFrom.SpawnName = spawnerTo.name;

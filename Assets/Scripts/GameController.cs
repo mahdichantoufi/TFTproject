@@ -21,7 +21,6 @@ public class GameController
         // TODO : getEnemyChampionsDetails();
         transform = GameManager.instance.transform;
         playerData = GameManager.instance.GetPlayer();
-        UnityEngine.Debug.Log(playerData);
         SpawnFightingChampions();
         SpawnEnemyChampions();
     }
@@ -30,45 +29,34 @@ public class GameController
     public void SpawnFightingChampions(){
         ChampionSpawner Spawner;
         Transform AllySpawnPositions = transform.Find("SpawnPositions");
-        
-        int i = 0;
+        Debug.Log("allies index :");
         foreach (Transform AllySP in AllySpawnPositions)
         {
             Spawner = null;
             Spawner = AllySP.gameObject.GetComponent<ChampionSpawner>();
-            if (Spawner != null){
-                Spawner.activateSpawnPoint();
-                Spawner.spawnChampion(GameManager.instance.GetChampions()[i]);
-
-                if (i==0){
-                    i = 2;
-                }
-                else if (i==2){
-                    i = 0;
-                }
+            int index = playerData.GetPlacementData().GetChampionPrefabIndex(AllySP.gameObject.name);
+            if (Spawner != null && index != -1){
+                Debug.Log("+"+index);
+                Spawner.spawnChampion(GameManager.instance.GetChampions()[index]);
             }
         }
     }
     public void SpawnEnemyChampions(){
         ChampionSpawner Spawner;
         Transform EnemySpawnPositions = transform.Find("EnemySpawnPositions");
-        int i = 1;
+        int i = 0;
+        Debug.Log("Spawning enemies...");
         foreach (Transform EnemySP in EnemySpawnPositions)
         {
             Spawner = null;
             Spawner = EnemySP.gameObject.GetComponent<ChampionSpawner>();
             if (Spawner != null){
                 Spawner.activateSpawnPoint();
-                Spawner.spawnChampion(GameManager.instance.GetEnemyChampions()[i]);
-
-                if (i==1){
-                    i = 3;
-                }
-                else if (i==3){
-                    i = 1;
-                }
+                Spawner.spawnChampion(GameManager.instance.GetEnemyChampions()[1]);
+                i++;
             }
         }
+        Debug.Log("Done... EnemiesNb: "+i);
     }
 
     public void AllEnemiesAreDead(bool Win){

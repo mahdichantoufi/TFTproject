@@ -67,17 +67,15 @@ public class GameManager : MonoBehaviour
         return this.playerData;
     }
     public void SetPlayerUsername(string username){
-        UnityEngine.Debug.Log(username);
         this.username = username;
     }
     public void Battle()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(2, LoadSceneMode.Single);
         gameController = new GameController();
     }
     public void Play()
     {
-        UnityEngine.Debug.Log("play");
         this.playerData = new PlayerData(username);
         championPrepController = new ChampionPrepController();
         SceneManager.LoadScene(1);
