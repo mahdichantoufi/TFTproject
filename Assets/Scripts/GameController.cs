@@ -7,13 +7,13 @@ using UnityEngine.UI;
 
 public class GameController
 {
-    protected PlayerData playerData;
+    private PlayerData playerData;
 
     public bool gameOver = false;
     // public GameObject labelGameOver;
     // public Text labelScore;
 
-    protected Transform transform;
+    private Transform transform;
 
     public GameController()
     {
@@ -21,10 +21,13 @@ public class GameController
         // TODO : getEnemyChampionsDetails();
         transform = GameManager.instance.transform;
         playerData = GameManager.instance.GetPlayer();
+       
+    }
+    public void init()
+    {
         SpawnFightingChampions();
         SpawnEnemyChampions();
     }
-
 
     public void SpawnFightingChampions(){
         ChampionSpawner Spawner;
@@ -35,6 +38,9 @@ public class GameController
             Spawner = null;
             Spawner = AllySP.gameObject.GetComponent<ChampionSpawner>();
             int index = playerData.GetPlacementData().GetChampionPrefabIndex(AllySP.gameObject.name);
+            UnityEngine.Debug.Log(index);
+            UnityEngine.Debug.Log(Spawner);
+            UnityEngine.Debug.Log(AllySP);
             if (Spawner != null && index != -1){
                 Debug.Log("+"+index);
                 Spawner.spawnChampion(GameManager.instance.GetChampions()[index]);

@@ -71,8 +71,10 @@ public class GameManager : MonoBehaviour
     }
     public void Battle()
     {
-        SceneManager.LoadScene(2, LoadSceneMode.Single);
         gameController = new GameController();
+        championPrepController = null;
+        //SceneManager.LoadScene(2);
+        gameController.init();
     }
     public void Play()
     {
