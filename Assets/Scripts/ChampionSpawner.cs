@@ -35,6 +35,7 @@ public class ChampionSpawner : MonoBehaviour
     }
     public void desactivateSpawnPoint(){
         containsChampion = false;
+        championPopped = false;
     }
     public bool spawnPointIsActive(){
         return containsChampion;

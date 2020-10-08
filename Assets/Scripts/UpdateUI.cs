@@ -14,7 +14,7 @@ public class UpdateUI : MonoBehaviour
     public Image healthBar;
     public Image xpBar;
 
-    private ChampionPrepController gameController;
+    private ChampionPrepController championPrepController;
     private GameManager gameManager;
 
     private PlayerData playerData;
@@ -28,13 +28,12 @@ public class UpdateUI : MonoBehaviour
     {
         fighting = false;
         gameManager = GameManager.instance;
-        gameController = gameManager.GetChampionPrepController();
+        championPrepController = gameManager.GetChampionPrepController();
         champions = new Champion[4];
         championsIndex = new int[4];
         playerData = GameManager.instance.GetPlayer();
         username.text = playerData.GetUsername();
-        UnityEngine.Debug.Log("spawn enemies");
-        gameController.SpawnEnemyChampions();
+        championPrepController.SpawnEnemyChampions(gameManager.GameLevel);
         refreshStore();
     }
 
@@ -48,20 +47,21 @@ public class UpdateUI : MonoBehaviour
         else if ( fighting == true && gameManager.fighting == false) {
             EnableUI();
             fighting = false;
-            gameManager.GetChampionPrepController().SpawnEnemyChampions();
+            gameManager.GetChampionPrepController().SpawnEnemyChampions(gameManager.GameLevel);
+            gameManager.GetChampionPrepController().RespawnAllies();
         }
         if(playerData != null)
         {
             if(playerData.uptodate == false)
             {
-            //update de l'ui
-            healthBar.fillAmount = 1.0f * playerData.GetHealth() / 100.0f;
-            xpBar.fillAmount = playerData.GetXp();
-            if (xpBar.fillAmount == 1.0f) xpBar.fillAmount = 0.0f;
-            level.text = playerData.GetLevel().ToString();
-            gold.text = playerData.GetGold().ToString();
-            playerData.uptodate = true;
-            } 
+                //update de l'ui
+                healthBar.fillAmount = 1.0f * playerData.GetHealth() / 100.0f;
+                xpBar.fillAmount = playerData.GetXp();
+                if (xpBar.fillAmount == 1.0f) xpBar.fillAmount = 0.0f;
+                level.text = playerData.GetLevel().ToString();
+                gold.text = playerData.GetGold().ToString();
+                playerData.uptodate = true;
+            }
         }
     }
 
@@ -101,10 +101,10 @@ public class UpdateUI : MonoBehaviour
     public void BuyChampion(int index)
     {
 
-        if(playerData.GetGold() >= champions[championsIndex[index]].price && gameController.getFirstAvailableSubsituteSpawnPoint() != null)
+        if(playerData.GetGold() >= champions[championsIndex[index]].price && championPrepController.getFirstAvailableSubsituteSpawnPoint() != null)
         {
             playerData.AddGold(-champions[championsIndex[index]].price);
-            gameController.addPurchasedChampion(championsIndex[index]);
+            championPrepController.addPurchasedChampion(championsIndex[index]);
         }
     }
     public void UpExperience()

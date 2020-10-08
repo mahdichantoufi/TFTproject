@@ -18,25 +18,17 @@ public class GameController
         // TODO : getEnemyChampionsDetails();
         transform = GameManager.instance.transform;
         playerData = GameManager.instance.GetPlayer();
-        ActivateFightingChampions();
+        ActivateFightingChampions("SpawnPositions");
+        ActivateFightingChampions("EnemySpawnPositions");
        
     }
 
-    public void ActivateFightingChampions(){
-        Transform AllySpawnPositions = transform.Find("SpawnPositions");
-        foreach (Transform AllySP in AllySpawnPositions)
+    public void ActivateFightingChampions(string SpanersParentName){
+        Transform SpawnPositions = transform.Find(SpanersParentName);
+        foreach (Transform SP in SpawnPositions)
         {
-            GameObject InstanceChampion = playerData.GetPlacementData().GetSpawnActiveInstance(AllySP.gameObject.name);
+            GameObject InstanceChampion = playerData.GetPlacementData().GetSpawnActiveInstance(SP.gameObject.name);
             if (InstanceChampion != null){
-                InstanceChampion.GetComponent<Champion>().setActive();
-            }
-        }
-        Transform EnemySpawnPositions = transform.Find("EnemySpawnPositions");
-        foreach (Transform EnemySP in EnemySpawnPositions)
-        {
-            GameObject InstanceChampion = playerData.GetPlacementData().GetSpawnActiveInstance(EnemySP.gameObject.name);
-            if (InstanceChampion != null)
-            {
                 InstanceChampion.GetComponent<Champion>().setActive();
             }
         }
@@ -52,19 +44,6 @@ public class GameController
             }
         }
     }*/
-
-    public void AllEnemiesAreDead(bool Win){
-        gameOver = true;
-        if(Win){
-            Debug.Log("GAMEOVER !! YOU WIN.");
-        } else {
-            Debug.Log("GAMEOVER !! YOU LOSE.");
-        }
-        GameManager.instance.EndOfBattle();
-        // labelGameOver.SetActive(true);
-
-        // TODO : setNextScene();
-    }
     private void getPlayerChampionsDetails(){
         //  foreach spawnpoint
         //      GET the champPrefabs and objects from global var

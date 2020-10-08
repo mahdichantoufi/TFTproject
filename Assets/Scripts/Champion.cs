@@ -88,7 +88,7 @@ public class Champion : MonoBehaviour
 		foreach (GameObject currentEnemy in allEnemies) {
             if(!currentEnemy.gameObject.GetComponent<Champion>().isDead()){
                 float distanceToEnemy = DistanceTo(currentEnemy.transform.position);
-                if (distanceToEnemy < distanceToClosestEnemy) {
+                if (currentEnemy.gameObject.GetComponent<Champion>().isFighting() && distanceToEnemy < distanceToClosestEnemy) {
                     distanceToClosestEnemy = distanceToEnemy;
                     closestEnemy = currentEnemy;
                 }
@@ -96,6 +96,9 @@ public class Champion : MonoBehaviour
 		}
         return closestEnemy;
 	}
+    public bool isFighting(){
+        return this.isActive;
+    }
 	GameObject FindClosestAlly()
 	{
     	float distanceToClosestAlly = 4.0f;	
@@ -137,7 +140,6 @@ public class Champion : MonoBehaviour
         }
     }
     void takeAttaque(float takenDamage){
-        Debug.Log("attacked by "+takenDamage);
         currentHealth -= takenDamage;
         if(currentHealth <= 0){
             die();

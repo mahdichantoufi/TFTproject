@@ -6,7 +6,7 @@ using UnityEngine;
 public class DragAndDrop : MonoBehaviour
 {
     private ChampionPrepController championPrepController;
-    private Transform transform;
+    private Transform gameManagerTransform;
 
     private TerrainCollider terrainCollider;
     private PlacementData playerPlacementData;
@@ -20,7 +20,7 @@ public class DragAndDrop : MonoBehaviour
     void Start()
     {
         championPrepController = GameManager.instance.GetChampionPrepController();
-        transform = GameManager.instance.transform;
+        gameManagerTransform = GameManager.instance.transform;
         terrainCollider = Terrain.activeTerrain.GetComponent<TerrainCollider>();
         playerPlacementData = GameManager.instance.GetPlayer().GetPlacementData();
     }
@@ -86,7 +86,7 @@ public class DragAndDrop : MonoBehaviour
 	{
     	float distanceToClosestSpawnPoint = 10f;
         Transform closestSpawner = null;
-        Transform allySubsSpawnPositions = transform.Find("SubsSpawnPositions");
+        Transform allySubsSpawnPositions = gameManagerTransform.Find("SubsSpawnPositions");
         foreach (Transform AllySSP in allySubsSpawnPositions)
         {
             float distanceToclick = Vector3.Distance (AllySSP.position, clickPos);
@@ -99,7 +99,7 @@ public class DragAndDrop : MonoBehaviour
                 }
             }
         }
-        Transform allySpawnPositions = transform.Find("SpawnPositions");
+        Transform allySpawnPositions = gameManagerTransform.Find("SpawnPositions");
         foreach (Transform AllySP in allySpawnPositions)
         {
             float distanceToclick = Vector3.Distance (AllySP.position, clickPos);
@@ -119,7 +119,7 @@ public class DragAndDrop : MonoBehaviour
 	{
     	float distanceToClosestSpawnPoint = 1000f;
         Transform closestSpawner = null;
-        Transform allySpawnPositions = transform.Find("SpawnPositions");
+        Transform allySpawnPositions = gameManagerTransform.Find("SpawnPositions");
         foreach (Transform AllySP in allySpawnPositions)
         {
             float distanceToclick = Vector3.Distance (AllySP.position, clickPos);
@@ -129,7 +129,7 @@ public class DragAndDrop : MonoBehaviour
             }
 
         }
-        Transform allySubsSpawnPositions = transform.Find("SubsSpawnPositions");
+        Transform allySubsSpawnPositions = gameManagerTransform.Find("SubsSpawnPositions");
         foreach (Transform AllySSP in allySubsSpawnPositions)
         {
             float distanceToclick = Vector3.Distance (AllySSP.position, clickPos);

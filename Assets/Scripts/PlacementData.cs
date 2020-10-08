@@ -12,12 +12,14 @@ public class PlacementData
 
     public class ChampInstanceData{
         public string SpawnName;
+        public Vector3 SpawnPosition;
         public int PrefabIndex;
         public GameObject ChampionInstance;
-        public ChampInstanceData (string spawnName, GameObject championInstance, int prefabIndex){
+        public ChampInstanceData (string spawnName, Vector3 spawnPosition, GameObject championInstance, int prefabIndex){
             this.SpawnName = spawnName;
             this.ChampionInstance = championInstance;
             this.PrefabIndex = prefabIndex;
+            this.SpawnPosition = spawnPosition;
         }
         public int getChampIndex(){
             return this.PrefabIndex;
@@ -67,12 +69,12 @@ public class PlacementData
         return -1;
     }
     public void addChampionInstance(
-        string spawnName, 
-        GameObject championInstance, 
+        string spawnName,  Vector3 spawnPosistion,
+        GameObject championInstance,
         int prefabIndex, 
         bool fighter)
     {
-        ChampInstanceData newChampInstance= new ChampInstanceData(spawnName, championInstance, prefabIndex);
+        ChampInstanceData newChampInstance= new ChampInstanceData(spawnName, spawnPosistion, championInstance, prefabIndex);
         if (isThereAnyFreeSpawnPoints() && newChampInstance != null) {
             if (fighter) {
                 Fighters.Add(newChampInstance);
@@ -85,18 +87,22 @@ public class PlacementData
     }
     //TODO : drag and drop disable for enemies
     public void addEnemyChampionInstance(
-        string spawnName, 
+        string spawnName,  Vector3 spawnPosistion,
         GameObject championInstance, 
         int prefabIndex)
     {
-        UnityEngine.Debug.Log(spawnName + championInstance + prefabIndex);
-        ChampInstanceData newChampInstance= new ChampInstanceData(spawnName, championInstance, prefabIndex);
+        //UnityEngine.Debug.Log(spawnName + championInstance + prefabIndex);
+        ChampInstanceData newChampInstance= new ChampInstanceData(spawnName, spawnPosistion, championInstance, prefabIndex);
         if (newChampInstance != null) {
             Enemies.Add(newChampInstance);
         }
     }
     public void removeEnemyChampionsInstances()
     {
+        foreach (ChampInstanceData Enemy in this.Enemies)
+        {
+            UnityEngine.Object.Destroy(Enemy.ChampionInstance);
+        }
         this.Enemies = new List<ChampInstanceData>();
     }
     public void setSpawner(string spawnNameFrom, string spawnNameTo, Vector3 spawnerPositionTo, bool ToIsFighterSpawn){
@@ -220,7 +226,6 @@ public class PlacementData
         }
         return null;
     }
-
     private ChampInstanceData findInEnemiesByNameprivate(string spawnNameFrom)
     {
 
@@ -254,7 +259,6 @@ public class PlacementData
         }
         return false;
     }
-
     public bool findInEnemiesByName(string spawnNameFrom)
     {
 

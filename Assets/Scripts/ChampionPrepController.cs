@@ -14,30 +14,49 @@ public class ChampionPrepController
     {
         transform = GameManager.instance.transform;
         playerData = GameManager.instance.GetPlayer();
-        //SpawnEnemyChampions();
+
     }
-
+    public void RespawnAllies(){
+        Transform SpawnPositions = transform.Find("SpawnPositions");
+        foreach (Transform SP in SpawnPositions)
+        {
+            GameObject ChampionInstance = playerData.GetPlacementData().GetSpawnActiveInstance(SP.gameObject.name);
+            if (ChampionInstance != null){
+                Debug.Log("Champion is ok "+ ChampionInstance.name);
+                Debug.Log("SPPOs "+ SP.position);
+                ChampionInstance.gameObject.SetActive(true);
+                ChampionInstance.transform.position = SP.position;
+            }
+        }
+    }
     // TODO : SpawnEnemyChampions()
     // TODO : SpawnEnemyChampions()
-    public void SpawnEnemyChampions(){
-        int prefabIndex = 1;
-
+    public void SpawnEnemyChampions(int levelToLoad){
+        Debug.Log(levelToLoad);
+        List<int> IndexesToSpawn = GameManager.instance.GetLevelEnemyChampionsIndex(levelToLoad);
+        int EnemiesCount = IndexesToSpawn.Count;
+        int i = 0;
         ChampionSpawner Spawner;
         Transform EnemySpawnPositions = transform.Find("EnemySpawnPositions");
          foreach (Transform EnemySP in EnemySpawnPositions)
          {
-             Spawner = null;
-             Spawner = EnemySP.gameObject.GetComponent<ChampionSpawner>();
-             if (Spawner != null){
-                GameObject instanceP = Spawner.spawnChampion(GameManager.instance.GetEnemyChampion(prefabIndex));
-                UnityEngine.Debug.Log(instanceP.gameObject.GetComponent<Champion>().championName);
-                playerData.GetPlacementData().addEnemyChampionInstance(
-                Spawner.gameObject.name, 
-                instanceP, prefabIndex);
-                instanceP.gameObject.SetActive(true);
-             }
+            Spawner = null;
+            Spawner = EnemySP.gameObject.GetComponent<ChampionSpawner>();
+            if (Spawner != null && EnemiesCount > i){
+             
+                int prefabIndex = IndexesToSpawn[i];
+                if (prefabIndex > -1){
+
+                    GameObject instanceP = Spawner.spawnChampion(GameManager.instance.GetEnemyChampion(prefabIndex));
+
+                    playerData.GetPlacementData().addEnemyChampionInstance(
+                    Spawner.gameObject.name, Spawner.transform.position, 
+                    instanceP, prefabIndex);
+                    instanceP.gameObject.SetActive(true);
+                }
+                i++;
+            }
         }
-         Debug.Log("Done... EnemiesNb: ");
      }
 
     public void addPurchasedChampion(int prefabIndex){
@@ -47,7 +66,7 @@ public class ChampionPrepController
         if (SubSpawner != null){
             GameObject instanceP = SubSpawner.spawnChampion(GameManager.instance.GetChampions()[prefabIndex]);
             playerData.GetPlacementData().addChampionInstance(
-                SubSpawner.gameObject.name, 
+                SubSpawner.gameObject.name, SubSpawner.transform.position,
                 instanceP, prefabIndex, false);
         }
     }

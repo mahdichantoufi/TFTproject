@@ -13,6 +13,10 @@ public class GameManager : MonoBehaviour
     private string username;
     public bool fighting;
 
+
+    public int GameLevel = 0;
+    private int LevelNumbers = 2;
+
     public GameObject ChampionPrefab1;
     public GameObject ChampionPrefab2;
     public GameObject ChampionPrefab3;
@@ -24,6 +28,7 @@ public class GameManager : MonoBehaviour
 
     private GameObject[] Champions;
     private GameObject[] EnemyChampions;
+    private int[,] EnemyChampionsPerLevel;
     private bool PlayerWonTheFight = true;
 
     void Awake()
@@ -40,6 +45,7 @@ public class GameManager : MonoBehaviour
         //Sets this to not be destroyed when reloading scene / Switching scenes
         DontDestroyOnLoad(gameObject);
     }
+    public void printOk(){}
     void Start()
     {
         Champions = new GameObject[4];
@@ -53,6 +59,21 @@ public class GameManager : MonoBehaviour
         EnemyChampions[1] = EnemyChampionPrefab2;
         EnemyChampions[2] = EnemyChampionPrefab3;
         EnemyChampions[3] = EnemyChampionPrefab4;
+
+        EnemyChampionsPerLevel = new int[LevelNumbers, 9];
+        for (int LevelIndex = 0; LevelIndex < LevelNumbers; LevelIndex++)
+        {
+            for (int championIndex = 0; championIndex < 9; championIndex++)
+            {
+                EnemyChampionsPerLevel[LevelIndex, championIndex] = -1;
+            }
+            
+        }
+        EnemyChampionsPerLevel[0, 0] = 1;
+        EnemyChampionsPerLevel[0, 4] = 0;
+        EnemyChampionsPerLevel[1, 0] = 0;
+        EnemyChampionsPerLevel[1, 5] = 2;
+        EnemyChampionsPerLevel[1, 3] = 3;
     }
     public GameController GetGameController()
     {
@@ -85,8 +106,15 @@ public class GameManager : MonoBehaviour
             this.PlayerWonTheFight = PlayerWon;
             fighting = false;
             gameController = null;
+
             championPrepController = new ChampionPrepController();
             playerData.GetPlacementData().removeEnemyChampionsInstances();
+            this.desactivateEnemySpawners();
+
+            if(this.GameLevel == this.LevelNumbers){
+                // TODO : GAMEOVER
+            } else this.GameLevel++;// TODO : loadEnemies with GameLevel
+
         }
     }
     public void Play()
@@ -116,8 +144,27 @@ public class GameManager : MonoBehaviour
     }
     public GameObject GetEnemyChampion(int i)
     {
+        Debug.Log("index to spanw : "+ i);
         return this.EnemyChampions[i];
     }
-
-
+    public List<int> GetLevelEnemyChampionsIndex(int levelToLoad){
+        List<int> IndexList= new List<int>();
+        for (int i = 0; i < this.EnemyChampionsPerLevel.GetLength(levelToLoad-1); i++)
+        {
+            IndexList.Add(this.EnemyChampionsPerLevel[levelToLoad-1, i]);
+        }
+        return IndexList;
+    }
+    public void desactivateEnemySpawners(){
+        ChampionSpawner Spawner;
+        Transform EnemySpawnPositions = transform.Find("EnemySpawnPositions");
+        foreach (Transform EnemySP in EnemySpawnPositions)
+        {
+             Spawner = null;
+             Spawner = EnemySP.gameObject.GetComponent<ChampionSpawner>();
+             if (Spawner != null){
+                 Spawner.desactivateSpawnPoint();
+             }
+        }
+    }
 }
