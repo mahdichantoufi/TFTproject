@@ -20,17 +20,20 @@ public class UpdateUI : MonoBehaviour
     private PlayerData playerData;
     private int[] championsIndex;
     Champion[] champions;
+    private bool fighting;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        fighting = false;
         gameManager = GameManager.instance;
         gameController = gameManager.GetChampionPrepController();
         champions = new Champion[4];
         championsIndex = new int[4];
         playerData = GameManager.instance.GetPlayer();
         username.text = playerData.GetUsername();
+        UnityEngine.Debug.Log("spawn enemies");
         gameController.SpawnEnemyChampions();
         refreshStore();
     }
@@ -38,19 +41,27 @@ public class UpdateUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(fighting == false && gameManager.fighting == true) {
+            DisableUI();
+            fighting = true;
+        }
+        else if ( fighting == true && gameManager.fighting == false) {
+            EnableUI();
+            fighting = false;
+            gameManager.GetChampionPrepController().SpawnEnemyChampions();
+        }
         if(playerData != null)
         {
             if(playerData.uptodate == false)
             {
-                //update de l'ui
-                healthBar.fillAmount = 1.0f * playerData.GetHealth() / 100.0f;
-                xpBar.fillAmount = playerData.GetXp();
-                if (xpBar.fillAmount == 1.0f) xpBar.fillAmount = 0.0f;
-                level.text = playerData.GetLevel().ToString();
-                gold.text = playerData.GetGold().ToString();
-                playerData.uptodate = true;
-            }
-            
+            //update de l'ui
+            healthBar.fillAmount = 1.0f * playerData.GetHealth() / 100.0f;
+            xpBar.fillAmount = playerData.GetXp();
+            if (xpBar.fillAmount == 1.0f) xpBar.fillAmount = 0.0f;
+            level.text = playerData.GetLevel().ToString();
+            gold.text = playerData.GetGold().ToString();
+            playerData.uptodate = true;
+            } 
         }
     }
 
@@ -112,13 +123,21 @@ public class UpdateUI : MonoBehaviour
             refreshStore();
         }
     }
+    private void DisableUI() {
+        transform.GetChild(1).gameObject.SetActive(false);
+        transform.GetChild(3).gameObject.SetActive(false);
+    }
+    private void EnableUI() {
+        transform.GetChild(1).gameObject.SetActive(true);
+        transform.GetChild(3).gameObject.SetActive(true);
+    }
     public void Battle()
     {
         gameManager.Battle();
     }
     public void Quit()
     {
-        GameObject.FindWithTag("GameManager").transform.GetComponent<GameManager>().Pause();
+        gameManager.Pause();
     }
 
 }

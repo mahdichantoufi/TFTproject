@@ -5,7 +5,7 @@ using UnityEngine;
 public class Champion : MonoBehaviour
 {
 	public Animator animator;
-    private GameController gameController;
+
     public string championName;
     public int price;
     public int attackDamage;
@@ -30,7 +30,6 @@ public class Champion : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameController = GameManager.instance.GetGameController();
         gameObject.transform.localScale += new Vector3(1,1,1);
         isAlive = true;
         currentAttackDamage = attackDamage;
@@ -63,10 +62,10 @@ public class Champion : MonoBehaviour
                 else 
                     Attack(closestEnemy);
             } else if (!moved){
-                if ( gameObject.tag == "Ally")
-                    gameController.AllEnemiesAreDead(true);
+                if ( gameObject.tag == "Ally") 
+                    GameManager.instance.GetGameController().AllEnemiesAreDead(true);
                 else
-                    gameController.AllEnemiesAreDead(false);
+                    GameManager.instance.GetGameController().AllEnemiesAreDead(false); 
             }
         }
     }
@@ -154,7 +153,6 @@ public class Champion : MonoBehaviour
         isActive = false;
         isAlive = false;
         currentHealth = 0;
-        GameManager.instance.EndOfBattle();
         this.gameObject.SetActive(false);
     }
     public bool isDead(){

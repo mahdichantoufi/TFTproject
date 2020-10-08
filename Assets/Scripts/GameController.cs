@@ -10,8 +10,6 @@ public class GameController
     private PlayerData playerData;
 
     public bool gameOver = false;
-    // public GameObject labelGameOver;
-    // public Text labelScore;
 
     private Transform transform;
 
@@ -20,18 +18,12 @@ public class GameController
         // TODO : getEnemyChampionsDetails();
         transform = GameManager.instance.transform;
         playerData = GameManager.instance.GetPlayer();
-       
-    }
-    public void init()
-    {
         ActivateFightingChampions();
-        // TODO : Activate Enemies
-        //SpawnEnemyChampions();
+       
     }
 
     public void ActivateFightingChampions(){
         Transform AllySpawnPositions = transform.Find("SpawnPositions");
-        //playerData.GetPlacementData().printME();
         foreach (Transform AllySP in AllySpawnPositions)
         {
             GameObject InstanceChampion = playerData.GetPlacementData().GetSpawnActiveInstance(AllySP.gameObject.name);
@@ -40,7 +32,6 @@ public class GameController
             }
         }
         Transform EnemySpawnPositions = transform.Find("EnemySpawnPositions");
-        //playerData.GetPlacementData().printME();
         foreach (Transform EnemySP in EnemySpawnPositions)
         {
             GameObject InstanceChampion = playerData.GetPlacementData().GetSpawnActiveInstance(EnemySP.gameObject.name);
@@ -61,22 +52,6 @@ public class GameController
             }
         }
     }*/
-    public void SpawnEnemyChampions(){
-        ChampionSpawner Spawner;
-        Transform EnemySpawnPositions = transform.Find("EnemySpawnPositions");
-        int i = 0;
-        Debug.Log("Spawning enemies...");
-        foreach (Transform EnemySP in EnemySpawnPositions)
-        {
-            Spawner = null;
-            Spawner = EnemySP.gameObject.GetComponent<ChampionSpawner>();
-            if (Spawner != null){
-                Spawner.spawnChampion(GameManager.instance.GetEnemyChampion(1));
-                i++;
-            }
-        }
-        Debug.Log("Done... EnemiesNb: "+i);
-    }
 
     public void AllEnemiesAreDead(bool Win){
         gameOver = true;
@@ -85,6 +60,7 @@ public class GameController
         } else {
             Debug.Log("GAMEOVER !! YOU LOSE.");
         }
+        GameManager.instance.EndOfBattle();
         // labelGameOver.SetActive(true);
 
         // TODO : setNextScene();
@@ -105,11 +81,5 @@ public class GameController
         //      GET them in class var
         //  Launch next scene (Champ-Select & placement)
     }
-    // public void BirdScore(){
-    //     if(!gameOver){
-    //         scoreCount++;
-    //         labelScore.text = "Score : " + scoreCount.ToString();
-    //     }
-    // }
- 
+
 }

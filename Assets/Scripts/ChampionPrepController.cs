@@ -24,11 +24,6 @@ public class ChampionPrepController
 
         ChampionSpawner Spawner;
         Transform EnemySpawnPositions = transform.Find("EnemySpawnPositions");
-        //Spawner = EnemySpawnPositions.GetChild(0).GetComponent<ChampionSpawner>();
-        //Debug.Log(Spawner);
-        //GameObject instanceP = Spawner.spawnChampion(GameManager.instance.GetEnemyChampion(prefabIndex));
-        //UnityEngine.Debug.Log(EnemyChampions[1].gameObject.GetComponent<Champion>().championName);
-         
          foreach (Transform EnemySP in EnemySpawnPositions)
          {
              Spawner = null;
@@ -44,28 +39,6 @@ public class ChampionPrepController
         }
          Debug.Log("Done... EnemiesNb: ");
      }
-
-    // TODO : SpawnFightingChampions
-    // public void SpawnFightingChampions(){
-    //     ChampionSpawner Spawner;
-    //     Transform AllySpawnPositions = transform.Find("FightSpawnPositions");
-    //     //playerData.GetPlacementData().printME();
-    //     Debug.Log("allies index :");
-    //     foreach (Transform AllySP in AllySpawnPositions)
-    //     {
-    //         Spawner = null;
-    //         Spawner = AllySP.gameObject.GetComponent<ChampionSpawner>();
-    //         int index = playerData.GetPlacementData().GetChampionPrefabIndex(AllySP.gameObject.name);
-    //         UnityEngine.Debug.Log(index);
-    //         UnityEngine.Debug.Log(Spawner);
-    //         UnityEngine.Debug.Log(AllySP);
-    //         if (Spawner != null && index != -1){
-    //             Debug.Log("+"+index);
-    //             Spawner.spawnChampion(GameManager.instance.GetChampions()[index+1]);
-    //         }
-    //     }
-    // }
-
 
     public void addPurchasedChampion(int prefabIndex){
 

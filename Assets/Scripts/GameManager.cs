@@ -11,8 +11,7 @@ public class GameManager : MonoBehaviour
     private ChampionPrepController championPrepController;
     private PlayerData playerData;
     private string username;
-
-
+    public bool fighting;
 
     public GameObject ChampionPrefab1;
     public GameObject ChampionPrefab2;
@@ -71,31 +70,29 @@ public class GameManager : MonoBehaviour
     }
     public void Battle()
     {
-        gameController = new GameController();
+        fighting = true;
         championPrepController = null;
-        //SceneManager.LoadScene(2);
-        gameController.init();
+        gameController = new GameController();    
     }
     public void EndOfBattle()
     {
-        gameController = null;
-        championPrepController = new ChampionPrepController();
-        SceneManager.LoadScene(1);
-
+        UnityEngine.Debug.Log("end of battle");
+        //TODO : Destoy enemies and set champions inactive
+        //playerData.GetPlacementData().DestroyEnemies
+        //playerData.GetPlacementData().SetChampionsInactive
+        if(fighting == true) {
+            fighting = false;
+            gameController = null;
+            championPrepController = new ChampionPrepController();
+        }
     }
     public void Play()
     {
+        fighting = false;
         this.playerData = new PlayerData(username);
-        SceneManager.LoadSceneAsync(1);
+        SceneManager.LoadScene(1);
         championPrepController = new ChampionPrepController();
     }
-
-    public void BackToMenu()
-    {
-        UnityEngine.Debug.Log("back");
-        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
-    }
-
     public void Quit()
     {
         Application.Quit();
