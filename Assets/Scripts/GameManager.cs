@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
 
     private GameObject[] Champions;
     private GameObject[] EnemyChampions;
+    private bool PlayerWonTheFight = true;
 
     void Awake()
     {
@@ -74,16 +75,18 @@ public class GameManager : MonoBehaviour
         championPrepController = null;
         gameController = new GameController();    
     }
-    public void EndOfBattle()
+    public void EndOfBattle(bool PlayerWon)
     {
         UnityEngine.Debug.Log("end of battle");
         //TODO : Destoy enemies and set champions inactive
         //playerData.GetPlacementData().DestroyEnemies
         //playerData.GetPlacementData().SetChampionsInactive
         if(fighting == true) {
+            this.PlayerWonTheFight = PlayerWon;
             fighting = false;
             gameController = null;
             championPrepController = new ChampionPrepController();
+            playerData.GetPlacementData().removeEnemyChampionsInstances();
         }
     }
     public void Play()

@@ -95,6 +95,10 @@ public class PlacementData
             Enemies.Add(newChampInstance);
         }
     }
+    public void removeEnemyChampionsInstances()
+    {
+        this.Enemies = new List<ChampInstanceData>();
+    }
     public void setSpawner(string spawnNameFrom, string spawnNameTo, Vector3 spawnerPositionTo, bool ToIsFighterSpawn){
         if(ToIsFighterSpawn && findInFightersByName(spawnNameFrom)){ // From fighter spawn to fighter spawn
             ChampInstanceData champData = findInFightersByNameprivate(spawnNameFrom);

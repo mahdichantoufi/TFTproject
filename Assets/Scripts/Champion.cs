@@ -62,10 +62,12 @@ public class Champion : MonoBehaviour
                 else 
                     Attack(closestEnemy);
             } else if (!moved){
-                if ( gameObject.tag == "Ally") 
-                    GameManager.instance.GetGameController().AllEnemiesAreDead(true);
+                if ( gameObject.tag == "Ally")
+                    GameManager.instance.EndOfBattle(true);
                 else
-                    GameManager.instance.GetGameController().AllEnemiesAreDead(false); 
+                    GameManager.instance.EndOfBattle(false);
+
+                this.gameObject.SetActive(false);
             }
         }
     }
@@ -156,7 +158,6 @@ public class Champion : MonoBehaviour
         this.gameObject.SetActive(false);
     }
     public bool isDead(){
-        if (isAlive) return false;
-        else return true;
+        return !(isAlive);
     }
 }
