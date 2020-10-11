@@ -70,7 +70,6 @@ public class GameManager : MonoBehaviour
             
         }
         EnemyChampionsPerLevel[0, 0] = 1;
-        EnemyChampionsPerLevel[0, 4] = 0;
         EnemyChampionsPerLevel[1, 0] = 0;
         EnemyChampionsPerLevel[1, 5] = 2;
         EnemyChampionsPerLevel[1, 3] = 3;

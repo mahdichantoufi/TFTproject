@@ -89,6 +89,7 @@ public class UpdateUI : MonoBehaviour
     private void GameOver(bool win) {
         DisableUI();
         transform.GetComponent<DragAndDrop>().enabled = false;
+        playerData.GetPlacementData().removeAlliesHealthBar();
         if(win) result.text = "Congratulations ! You won ! ";
         else result.text = "GameOver ! You lose !";
     }

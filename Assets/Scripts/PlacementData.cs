@@ -97,6 +97,12 @@ public class PlacementData
             Enemies.Add(newChampInstance);
         }
     }
+    public void removeAlliesHealthBar() {
+           foreach (ChampInstanceData Ally in this.Fighters)
+        {
+            Ally.ChampionInstance.GetComponent<HealthBar>().destroyHealthBar();
+        }
+    }
     public void removeEnemyChampionsInstances()
     {
         foreach (ChampInstanceData Enemy in this.Enemies)
