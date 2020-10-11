@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4899884208792388814}
   - component: {fileID: 2211781757278782314}
   - component: {fileID: 1185992405630478364}
+  - component: {fileID: 4133992660179883530}
   m_Layer: 0
   m_Name: Heavy
   m_TagString: Ally
@@ -61,7 +62,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
-  gameController: {fileID: 0}
   championName: HeavyBryan
   price: 5
   attackDamage: 30
@@ -100,6 +100,20 @@ CapsuleCollider:
   m_Height: 2.5631003
   m_Direction: 1
   m_Center: {x: 0, y: 1.0707238, z: 0}
+--- !u!114 &4133992660179883530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1d8b689a0af4f04a9f5d7db28ab2e2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthBarPref: {fileID: 4740020369538620622, guid: b4421bacbbaab644eadb5e813e5cd2d1,
+    type: 3}
 --- !u!1 &100002
 GameObject:
   m_ObjectHideFlags: 0

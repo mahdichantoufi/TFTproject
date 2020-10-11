@@ -1848,6 +1848,7 @@ GameObject:
   - component: {fileID: 915386267778139351}
   - component: {fileID: -589379068252896500}
   - component: {fileID: 3878861101191027661}
+  - component: {fileID: 8448631662580320038}
   m_Layer: 0
   m_Name: EnemyBerserker
   m_TagString: Enemy
@@ -1934,3 +1935,17 @@ CapsuleCollider:
   m_Height: 2.8767514
   m_Direction: 1
   m_Center: {x: 0, y: 1.2275493, z: 0}
+--- !u!114 &8448631662580320038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7317606112591864790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1d8b689a0af4f04a9f5d7db28ab2e2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthBarPref: {fileID: 5670444417165596746, guid: 11aca92f61a0d224ab3c92a30a786302,
+    type: 3}

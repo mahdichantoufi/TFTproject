@@ -1333,6 +1333,7 @@ GameObject:
   - component: {fileID: 759602103767630977}
   - component: {fileID: 2107552643335053790}
   - component: {fileID: -2010384309093420960}
+  - component: {fileID: -5018815018047733386}
   m_Layer: 0
   m_Name: EnemyHeavy
   m_TagString: Enemy
@@ -1419,6 +1420,20 @@ CapsuleCollider:
   m_Height: 2.5631003
   m_Direction: 1
   m_Center: {x: 0, y: 1.0707238, z: 0}
+--- !u!114 &-5018815018047733386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5293212445054715631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1d8b689a0af4f04a9f5d7db28ab2e2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthBarPref: {fileID: 5670444417165596746, guid: 11aca92f61a0d224ab3c92a30a786302,
+    type: 3}
 --- !u!1 &5293212445054715633
 GameObject:
   m_ObjectHideFlags: 0

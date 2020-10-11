@@ -14,7 +14,6 @@ public class ChampionPrepController
     {
         transform = GameManager.instance.transform;
         playerData = GameManager.instance.GetPlayer();
-
     }
     public void RespawnAllies(){
         Transform SpawnPositions = transform.Find("SpawnPositions");
@@ -22,15 +21,11 @@ public class ChampionPrepController
         {
             GameObject ChampionInstance = playerData.GetPlacementData().GetSpawnActiveInstance(SP.gameObject.name);
             if (ChampionInstance != null){
-                Debug.Log("Champion is ok "+ ChampionInstance.name);
-                Debug.Log("SPPOs "+ SP.position);
-                ChampionInstance.gameObject.SetActive(true);
+                ChampionInstance.GetComponent<Champion>().pop();
                 ChampionInstance.transform.position = SP.position;
             }
         }
     }
-    // TODO : SpawnEnemyChampions()
-    // TODO : SpawnEnemyChampions()
     public void SpawnEnemyChampions(int levelToLoad){
         Debug.Log(levelToLoad);
         List<int> IndexesToSpawn = GameManager.instance.GetLevelEnemyChampionsIndex(levelToLoad);

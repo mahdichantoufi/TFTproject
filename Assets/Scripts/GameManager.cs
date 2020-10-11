@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     private GameObject[] Champions;
     private GameObject[] EnemyChampions;
     private int[,] EnemyChampionsPerLevel;
-    private bool PlayerWonTheFight = true;
+    public bool PlayerWonTheFight = true;
 
     void Awake()
     {
@@ -75,6 +75,9 @@ public class GameManager : MonoBehaviour
         EnemyChampionsPerLevel[1, 5] = 2;
         EnemyChampionsPerLevel[1, 3] = 3;
     }
+    public int GetLevelNumbers() {
+        return this.LevelNumbers;
+    }
     public GameController GetGameController()
     {
         return this.gameController;
@@ -99,23 +102,27 @@ public class GameManager : MonoBehaviour
     public void EndOfBattle(bool PlayerWon)
     {
         UnityEngine.Debug.Log("end of battle");
-        //TODO : Destoy enemies and set champions inactive
-        //playerData.GetPlacementData().DestroyEnemies
-        //playerData.GetPlacementData().SetChampionsInactive
         if(fighting == true) {
             this.PlayerWonTheFight = PlayerWon;
             fighting = false;
             gameController = null;
-
             championPrepController = new ChampionPrepController();
             playerData.GetPlacementData().removeEnemyChampionsInstances();
-            this.desactivateEnemySpawners();
-
-            if(this.GameLevel == this.LevelNumbers){
-                // TODO : GAMEOVER
-            } else this.GameLevel++;// TODO : loadEnemies with GameLevel
-
+            this.desactivateSpawners("EnemySpawnPositions");
+            if(this.PlayerWonTheFight) this.PlayerWon();
+            else this.PlayerLost();
+            UnityEngine.Debug.Log(this.GameLevel);
+            UnityEngine.Debug.Log(PlayerWon);
         }
+    }
+    private void PlayerWon() {
+        this.GameLevel++;
+        playerData.AddGold(10);
+        playerData.AddXp(2);
+    }
+    private void PlayerLost() {
+        playerData.AddHealth(-10);
+        playerData.AddXp(2);
     }
     public void Play()
     {
@@ -123,6 +130,7 @@ public class GameManager : MonoBehaviour
         this.playerData = new PlayerData(username);
         SceneManager.LoadScene(1);
         championPrepController = new ChampionPrepController();
+        championPrepController.RespawnAllies();
     }
     public void Quit()
     {
@@ -131,6 +139,9 @@ public class GameManager : MonoBehaviour
     public void Pause()
     {
         UnityEngine.Debug.Log("pause");
+        //reset
+        desactivateSpawners("SpawnPositions");
+        desactivateSpawners("EnemySpawnPositions");
         SceneManager.LoadScene(0);
     }
     public Champion GetChampion(int index)
@@ -149,19 +160,20 @@ public class GameManager : MonoBehaviour
     }
     public List<int> GetLevelEnemyChampionsIndex(int levelToLoad){
         List<int> IndexList= new List<int>();
-        for (int i = 0; i < this.EnemyChampionsPerLevel.GetLength(levelToLoad-1); i++)
+        UnityEngine.Debug.Log("spawning enemies on : " + this.EnemyChampionsPerLevel.GetLength(1) + "array index");
+        for (int i = 0; i < this.EnemyChampionsPerLevel.GetLength(1); i++)
         {
-            IndexList.Add(this.EnemyChampionsPerLevel[levelToLoad-1, i]);
+            IndexList.Add(this.EnemyChampionsPerLevel[levelToLoad, i]);
         }
         return IndexList;
     }
-    public void desactivateEnemySpawners(){
+    public void desactivateSpawners( string toreset){
         ChampionSpawner Spawner;
-        Transform EnemySpawnPositions = transform.Find("EnemySpawnPositions");
-        foreach (Transform EnemySP in EnemySpawnPositions)
+        Transform SpawnPositions = transform.Find(toreset);
+        foreach (Transform SP in SpawnPositions)
         {
              Spawner = null;
-             Spawner = EnemySP.gameObject.GetComponent<ChampionSpawner>();
+             Spawner = SP.gameObject.GetComponent<ChampionSpawner>();
              if (Spawner != null){
                  Spawner.desactivateSpawnPoint();
              }

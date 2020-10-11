@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Champion : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class Champion : MonoBehaviour
     public string championName;
     public int price;
     public int attackDamage;
-    public int health;
+    private int health = 100;
     public int shield;
     public float speed;
     public float attackRange;
@@ -21,6 +22,8 @@ public class Champion : MonoBehaviour
     private float currentSpeed;
     private float currentAttackRange;
     private float currentAttackCooldown;
+
+    private Image healthBar;
 
     private float timeSinceLastAttack;
     private bool isAlive;
@@ -141,16 +144,19 @@ public class Champion : MonoBehaviour
     }
     void takeAttaque(float takenDamage){
         currentHealth -= takenDamage;
+        transform.GetComponent<HealthBar>().SetHealth(currentHealth);
+        // healthBar.fillAmount = currentHealth / health * 1.0f;
         if(currentHealth <= 0){
             die();
         }
         // Debug.Log("Taken damage = " + takenDamage.ToString());
         // Debug.Log("Current health = " + currentHealth.ToString());
     }
-    void pop(){
+    public void pop(){
         isActive = false;
         isAlive = true;
         currentHealth = health;
+        transform.GetComponent<HealthBar>().SetHealth(currentHealth);
         this.gameObject.SetActive(true);
     }
     void die(){

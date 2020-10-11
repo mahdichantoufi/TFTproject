@@ -8,11 +8,13 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 400000}
+  - component: {fileID: 4005589636315217373}
   - component: {fileID: 11400000}
   - component: {fileID: 7582162953901547937}
+  - component: {fileID: 691100482594597560}
   - component: {fileID: -3415166223528546172}
   - component: {fileID: -8466153293511974358}
+  - component: {fileID: 4593848385431339812}
   m_Layer: 0
   m_Name: Berserker
   m_TagString: Ally
@@ -20,8 +22,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &400000
-Transform:
+--- !u!224 &4005589636315217373
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -35,6 +37,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 26.9, y: 13.8}
+  m_SizeDelta: {x: 153.88635, y: 72.36597}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,7 +68,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
-  gameController: {fileID: 0}
   championName: Berserker
   price: 4
   attackDamage: 20
@@ -70,6 +76,20 @@ MonoBehaviour:
   speed: 0.3
   attackRange: 1
   attackCooldown: 1.5
+--- !u!114 &691100482594597560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1d8b689a0af4f04a9f5d7db28ab2e2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthBarPref: {fileID: 4740020369538620622, guid: b4421bacbbaab644eadb5e813e5cd2d1,
+    type: 3}
 --- !u!54 &-3415166223528546172
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -100,6 +120,14 @@ CapsuleCollider:
   m_Height: 2.8767514
   m_Direction: 1
   m_Center: {x: 0, y: 1.2275493, z: 0}
+--- !u!222 &4593848385431339812
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_CullTransparentMesh: 0
 --- !u!1 &177074
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,7 +158,7 @@ Transform:
   m_Children:
   - {fileID: 477076}
   - {fileID: 477078}
-  m_Father: {fileID: 400000}
+  m_Father: {fileID: 4005589636315217373}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &9577182

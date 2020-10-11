@@ -16,7 +16,7 @@ public class PlayerData
     private int NumberOfSubsSpawns = 10;
     public PlayerData (string username){
         this.username = username;
-        this.earnedGold = 5000;
+        this.earnedGold = 50;
         this.experiencePoints = 0;
         this.level = 1;
         this.health = 100;

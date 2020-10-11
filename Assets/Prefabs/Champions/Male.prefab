@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -6195125963977029574}
   - component: {fileID: -8362838798032563101}
   - component: {fileID: 8963962339081474647}
+  - component: {fileID: -3191529847195681834}
   m_Layer: 0
   m_Name: Male
   m_TagString: Ally
@@ -61,7 +62,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
-  gameController: {fileID: 0}
   championName: SlimyPit
   price: 3
   attackDamage: 10
@@ -100,6 +100,20 @@ CapsuleCollider:
   m_Height: 2.5574367
   m_Direction: 1
   m_Center: {x: 0, y: 1.067892, z: 0}
+--- !u!114 &-3191529847195681834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1d8b689a0af4f04a9f5d7db28ab2e2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthBarPref: {fileID: 4740020369538620622, guid: b4421bacbbaab644eadb5e813e5cd2d1,
+    type: 3}
 --- !u!1 &100002
 GameObject:
   m_ObjectHideFlags: 0

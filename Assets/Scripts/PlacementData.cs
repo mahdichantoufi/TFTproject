@@ -101,6 +101,7 @@ public class PlacementData
     {
         foreach (ChampInstanceData Enemy in this.Enemies)
         {
+            Enemy.ChampionInstance.GetComponent<HealthBar>().destroyHealthBar();
             UnityEngine.Object.Destroy(Enemy.ChampionInstance);
         }
         this.Enemies = new List<ChampInstanceData>();

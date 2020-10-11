@@ -11,6 +11,7 @@ public class UpdateUI : MonoBehaviour
     public TextMeshProUGUI username;
     public TextMeshProUGUI gold;
     public TextMeshProUGUI level;
+    public TextMeshProUGUI result;
     public Image healthBar;
     public Image xpBar;
 
@@ -34,6 +35,7 @@ public class UpdateUI : MonoBehaviour
         playerData = GameManager.instance.GetPlayer();
         username.text = playerData.GetUsername();
         championPrepController.SpawnEnemyChampions(gameManager.GameLevel);
+        result.text = "Stage : " + gameManager.GameLevel.ToString();
         refreshStore();
     }
 
@@ -45,10 +47,29 @@ public class UpdateUI : MonoBehaviour
             fighting = true;
         }
         else if ( fighting == true && gameManager.fighting == false) {
-            EnableUI();
+            if(playerData.GetHealth() <= 0) {
+                GameOver(false);
+            }
+            else {
+                EnableUI();
+                refreshStore();
+                UnityEngine.Debug.Log("++ lvl " + gameManager.GameLevel + "sur " + gameManager.GetLevelNumbers());
+                if(gameManager.GameLevel < gameManager.GetLevelNumbers()) {
+                    championPrepController.RespawnAllies();
+                    championPrepController.SpawnEnemyChampions(gameManager.GameLevel);
+                    //update UI with bool win
+                    if(gameManager.PlayerWonTheFight) {
+                        result.text = "Victory ! Stage : " + gameManager.GameLevel.ToString();
+                    }
+                    else {
+                        result.text = "Defeat ! Stage : " + gameManager.GameLevel.ToString();
+                    }
+            }
+            else {
+               GameOver(true);
+            }
             fighting = false;
-            gameManager.GetChampionPrepController().SpawnEnemyChampions(gameManager.GameLevel);
-            gameManager.GetChampionPrepController().RespawnAllies();
+            }    
         }
         if(playerData != null)
         {
@@ -63,6 +84,13 @@ public class UpdateUI : MonoBehaviour
                 playerData.uptodate = true;
             }
         }
+    }
+
+    private void GameOver(bool win) {
+        DisableUI();
+        transform.GetComponent<DragAndDrop>().enabled = false;
+        if(win) result.text = "Congratulations ! You won ! ";
+        else result.text = "GameOver ! You lose !";
     }
 
     public void refreshStore()
